@@ -1,0 +1,88 @@
+<div class="register-form">
+  <label for="registerType">Register Type:</label>
+  <select id="registerType" [(ngModel)]="selectedType">
+    <option value="N">Integer (N)</option>
+    <option value="F">Float (F)</option>
+    <option value="B">Bit (B)</option>
+  </select>
+
+  <label for="startAddress">Start Address:</label>
+  <input id="startAddress" type="text" [(ngModel)]="startAddress" placeholder="7:0">
+
+  <label for="endAddress">End Address:</label>
+  <input id="endAddress" type="text" [(ngModel)]="endAddress" placeholder="7:50">
+
+  <button (click)="fetchRegisters()">Submit</button>
+</div>
+<div class="register-form">
+  <label for="registerType">Register Type:</label>
+  <select id="registerType" [(ngModel)]="selectedTypes" multiple>
+    <option value="N">Integer (N)</option>
+    <option value="F">Float (F)</option>
+    <option value="B">Bit (B)</option>
+  </select>
+
+  <label for="startAddress">Start Address:</label>
+  <input id="startAddress" type="text" [(ngModel)]="startAddress" placeholder="7:0">
+
+  <label for="endAddress">End Address:</label>
+  <input id="endAddress" type="text" [(ngModel)]="endAddress" placeholder="7:50">
+
+  <button (click)="fetchRegisters()">Submit</button>
+</div>
+
+<div class="register-form">
+  <h3>Select Register Ranges</h3>
+
+  <!-- Integer (N) Range -->
+  <label for="intStart">Integer (N) Start:</label>
+  <input id="intStart" type="text" [(ngModel)]="intStart" placeholder="7:0">
+  <label for="intEnd">End:</label>
+  <input id="intEnd" type="text" [(ngModel)]="intEnd" placeholder="7:50">
+
+  <!-- Float (F) Range -->
+  <label for="floatStart">Float (F) Start:</label>
+  <input id="floatStart" type="text" [(ngModel)]="floatStart" placeholder="8:0">
+  <label for="floatEnd">End:</label>
+  <input id="floatEnd" type="text" [(ngModel)]="floatEnd" placeholder="8:20">
+
+  <!-- Bit (B) Range -->
+  <label for="bitStart">Bit (B) Start:</label>
+  <input id="bitStart" type="text" [(ngModel)]="bitStart" placeholder="3:0/0">
+  <label for="bitEnd">End:</label>
+  <input id="bitEnd" type="text" [(ngModel)]="bitEnd" placeholder="3:0/15">
+
+  <button (click)="fetchRegisters()">Submit</button>
+</div>
+<div class="register-form">
+  <h3>Select Register Ranges</h3>
+
+  <!-- Integer (N) Range -->
+  <label for="intStart">Integer (N) Start:</label>
+  <input id="intStart" type="text" [(ngModel)]="intStart" (input)="validateInput('int')" placeholder="7:0">
+  <span *ngIf="!validInt" class="error">Format: 7:0</span>
+
+  <label for="intEnd">End:</label>
+  <input id="intEnd" type="text" [(ngModel)]="intEnd" (input)="validateInput('int')" placeholder="7:50">
+  <span *ngIf="!validInt" class="error">Format: 7:50</span>
+
+  <!-- Float (F) Range -->
+  <label for="floatStart">Float (F) Start:</label>
+  <input id="floatStart" type="text" [(ngModel)]="floatStart" (input)="validateInput('float')" placeholder="8:0">
+  <span *ngIf="!validFloat" class="error">Format: 8:0</span>
+
+  <label for="floatEnd">End:</label>
+  <input id="floatEnd" type="text" [(ngModel)]="floatEnd" (input)="validateInput('float')" placeholder="8:20">
+  <span *ngIf="!validFloat" class="error">Format: 8:20</span>
+
+  <!-- Bit (B) Range -->
+  <label for="bitStart">Bit (B) Start:</label>
+  <input id="bitStart" type="text" [(ngModel)]="bitStart" (input)="validateInput('bit')" placeholder="3:0/0">
+  <span *ngIf="!validBit" class="error">Format: 3:0/0</span>
+
+  <label for="bitEnd">End:</label>
+  <input id="bitEnd" type="text" [(ngModel)]="bitEnd" (input)="validateInput('bit')" placeholder="3:0/15">
+  <span *ngIf="!validBit" class="error">Format: 3:0/15</span>
+
+  <button (click)="fetchRegisters()" [disabled]="!isValid()">Submit</button>
+</div>

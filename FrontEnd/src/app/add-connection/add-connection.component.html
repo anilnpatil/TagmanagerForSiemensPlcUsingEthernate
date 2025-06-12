@@ -1,0 +1,31 @@
+<div class="header">
+  <mat-icon class="home-icon" (click)="goToHome()">home</mat-icon>
+  <h2 class="title">Add Connection</h2>
+  <button mat-button class="back-button" (click)="goBack()">Back</button>
+</div>
+
+<form (ngSubmit)="addConnection()" class="connection-form">
+  <mat-form-field>
+    <input matInput placeholder="Name" [(ngModel)]="connection.name" name="name" (input)="validateForm()" required>
+  </mat-form-field>    
+  <mat-form-field>
+    <input matInput placeholder="IP Address" [(ngModel)]="connection.ipAddress" name="ipAddress" (input)="validateForm()" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Subnet" [(ngModel)]="connection.subnet" name="subnet" (input)="validateForm()" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Gateway" [(ngModel)]="connection.gateway" name="gateway" (input)="validateForm()" required>
+  </mat-form-field>
+  <div class="actions">
+    <button mat-raised-button color="primary" type="submit" [disabled]="!isFormValid">OK</button>
+    <button mat-button class="cancel-button" type="button" (click)="clearForm()">Cancel</button>
+  </div>
+</form>
+
+<div *ngIf="successMessage" class="success-message">
+  <p>{{ successMessage }}</p>
+</div>
+<div *ngIf="errorMessage" class="error-message">
+  <p>{{ errorMessage }}</p>
+</div>

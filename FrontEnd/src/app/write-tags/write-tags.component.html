@@ -1,0 +1,135 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Write Tag Values</title>
+  </head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Write Tag Values</h2>
+      <button
+        mat-raised-button
+        color="primary"
+        class="write-button"
+        [disabled]="!canWriteTags()"
+        (click)="writeTags()"
+      >
+        Write Tags
+      </button>
+      <button mat-raised-button class="back-button" (click)="goBack()">Back</button>
+    </div>
+
+    <div class="content">
+      <div *ngIf="loading" class="loading">Writing tag values...</div>
+
+      <div *ngIf="!loading && tags.length > 0">
+        <div class="tag-list">
+          <div *ngFor="let tag of tags" class="tag-item">
+            <span class="tag-name">{{ tag.tag }}</span>
+            <input
+              [(ngModel)]="tag.value"
+              (ngModelChange)="selectTagForWriting(tag)"
+              placeholder="Enter value"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!loading && tags.length === 0" class="no-tags">
+        No saved tags available to write values.
+      </div>
+    </div>
+
+    <div *ngIf="message" class="message {{ messageType }}">
+      {{ message }}
+    </div>
+
+    <div class="footer">
+      <span>* * * * *</span>
+    </div>
+  </div>
+</body>
+</html>
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Write Tag Values</title>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Write Tag Values</h2>
+      <div class="button-group">
+        <button class="write-button" 
+                [disabled]="!canWriteTags()" 
+                (click)="writeTags()">
+          Write Tags
+        </button>
+        <button class="back-button" (click)="goBack()">Back</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div *ngIf="loading" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div>Writing tag values...</div>
+      </div>
+
+      <div *ngIf="!loading && tags.length > 0" class="data-table">
+        <div class="table-header">
+          <div class="header-cell tag-col">Tag Name</div>
+          <div class="header-cell">Value to Write</div>
+          <div class="header-cell">Value Written</div>
+          <div class="header-cell">Data Type</div>
+          <div class="header-cell">Status</div>
+        </div>
+        
+        <div class="table-body">
+          <div *ngFor="let tag of tags" class="table-row">
+            <div class="table-cell tag-col">{{ tag.tag }}</div>
+            <div class="table-cell">
+              <input [(ngModel)]="tag.value"
+                     (ngModelChange)="selectTagForWriting(tag)"
+                     placeholder="Enter value" />
+            </div>
+            <div class="table-cell">
+              <span *ngIf="tag.response" class="value-written">
+                {{ tag.response.value_written }}
+              </span>
+            </div>
+            <div class="table-cell">
+              <span *ngIf="tag.response">{{ tag.response.data_type }}</span>
+            </div>
+            <div class="table-cell">
+              <span *ngIf="tag.response" 
+                    class="status-badge"
+                    [class.success]="tag.response.status === 'Success'"
+                    [class.failed]="tag.response.status === 'Failed'">
+                {{ tag.response.status }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!loading && tags.length === 0" class="empty-state">
+        <mat-icon>info</mat-icon>
+        <p>No saved tags available to write values</p>
+      </div>
+    </div>
+
+    <div *ngIf="message" class="snackbar {{ messageType }}">
+      {{ message }}
+    </div>
+
+    <div class="footer">
+      <span>PLC Tag Writer v1.0</span>
+    </div>
+  </div>
+</body>
+</html>

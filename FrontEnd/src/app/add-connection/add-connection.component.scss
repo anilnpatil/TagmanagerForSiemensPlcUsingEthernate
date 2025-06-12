@@ -1,0 +1,109 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #9af7cd; /* Header background color */
+  padding: 10px 20px; /* Add spacing */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for header */
+}
+
+.home-icon {
+  cursor: pointer;
+  font-size: 30px;
+  color: #007bff; /* Icon color */
+  transition: transform 0.3s, color 0.3s;
+
+  &:hover {
+    color: #1976d2; /* Change color on hover */
+    transform: scale(1.1); /* Slightly enlarge icon */
+  }
+}
+
+.title {
+  flex: 1;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333; /* Title color */
+  margin: 0; /* Remove default margin */
+}
+
+.back-button {
+  background-color: #ffd54f !important;
+  color: black ;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 8px 16px;
+  transition: background-color 0.3s, transform 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+    background-color: yellow !important; /* Light yellow on hover */
+    color: red;
+  }
+
+  &:active {
+    box-shadow: inset 3px 3px 5px #999;
+    transform: translateY(2px);
+  }
+}
+
+.connection-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+  margin: 20px auto;
+  background-color: lightblue; /* Set the background color for the form */
+  padding: 20px; /* Add padding for better spacing */
+  border-radius: 8px; /* Rounded edges */
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+button.cancel-button {
+  background-color: black !important;
+  color: lightyellow ;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: background-color 0.3s, transform 0.3s;
+
+  &:hover {
+    color: red;
+    background-color: yellow !important; /* Lighten cancel button color on hover */    
+  }
+
+  &:active {
+    box-shadow: inset 3px 3px 5px #999;
+    transform: translateY(2px);
+  }
+}
+
+.success-message {
+  background-color: rgb(0, 255, 42);
+  padding: 10px;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+.error-message {
+  background-color: rgb(0, 255, 42);
+  color:rgb(255, 0, 25);
+  padding: 10px;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+

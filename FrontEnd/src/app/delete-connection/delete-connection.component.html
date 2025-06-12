@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Connection</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <div class="header">
+    <mat-icon (click)="goToHome()" class="home-icon">home</mat-icon>
+    <h1 class="title">Delete Connection</h1>
+    <div class="header-actions">
+      <button 
+        mat-button 
+        class="cancel" 
+        (click)="cancelDeletion()">
+        Cancel
+      </button>
+      <button 
+        mat-button 
+        class="delete" 
+        [disabled]="!selectedConnection" 
+        (click)="deleteConnection()">
+        Delete
+      </button>
+    </div>
+  </div>
+  <div class="connections-container">
+    <div class="connections-list">
+      <div *ngFor="let connection of connections" class="connection-box" 
+           [ngClass]="{'selected': connection === selectedConnection}" 
+           (click)="selectConnection(connection)">
+        <div><strong>Name:</strong> {{ connection.name }}</div>
+        <div><strong>IP Address:</strong> {{ connection.ipAddress }}</div>
+        <div><strong>Gateway:</strong> {{ connection.gateway }}</div>
+        <div><strong>Subnet:</strong> {{ connection.subnet }}</div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+

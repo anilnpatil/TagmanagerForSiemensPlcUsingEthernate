@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tag Manager</title> 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container-wrapper">
+    <!-- Header Section -->
+    <div class="header">
+      <div class="left-controls">
+        <mat-icon (click)="goToHome()" class="home-icon">home</mat-icon>
+      </div>
+      <div class="center-controls">
+        <strong>Active Connection:</strong> 
+        <span *ngIf="connection">{{ connection.name }} ({{ connection.ipAddress }})</span>
+        <span *ngIf="!connection">No Connection</span>
+      </div>
+      <div class="right-controls">
+        <button class="read-tags" (click)="navigateToReadTags()">Read Tags</button>
+        <button class="write-tags" (click)="navigateToWriteTags()">Write Tags</button>
+      </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+      <div class="box">
+        <h2 class="fixed-heading">Available Tags:</h2>
+        <div class="scrollable-content">
+          <ul>
+            <li *ngFor="let tag of availableTags" 
+                (click)="selectTag(tag, $event, false)"
+                [class.selected]="selectedTags.includes(tag)">
+              {{ tag }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button mat-icon-button 
+                (click)="moveSelectedTags(true)"
+                [class.selected]="isMoveToRightAllowed()">
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+        <button mat-icon-button 
+                (click)="moveSelectedTags(false)"
+                [class.selected]="isMoveToLeftAllowed()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+
+      <div class="box">
+        <h2 class="fixed-heading">Selected Tags:</h2>
+        <div class="scrollable-content">
+          <ul>
+            <li *ngFor="let tag of rightBoxTags"
+                (click)="selectTag(tag, $event, true)"
+                [class.selected]="selectedTags.includes(tag)"
+                [class.new-tag]="isNewTag(tag)">
+              {{ tag }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Controls -->
+  <div class="bottom-controls">
+    <button class="ok" (click)="saveSelectedTags()">OK</button>
+    <button class="cancel" (click)="clearSelectedTags()">Cancel</button>
+  </div>
+
+  <!-- Message Section -->
+  <div *ngIf="message" class="message {{ messageType }}">
+    {{ message }}
+  </div>
+</body>
+
+</html>

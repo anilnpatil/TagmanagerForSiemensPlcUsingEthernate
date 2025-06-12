@@ -1,0 +1,109 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #9af7cd; /* Header background color */
+  border-bottom: 1px solid #ddd; /* Header border */
+  position: sticky; /* Keeps the header fixed */
+  top: 0; /* Positioning the header at the top */
+  z-index: 10; /* Ensures header stays above the main content */
+  overflow: hidden; /* Prevent scrolling for the header */
+}
+
+.home-icon {
+  cursor: pointer;
+  font-size: 30px;
+  color: #007bff; /* Icon color */
+  transition: transform 0.3s, color 0.3s;
+
+  &:hover {
+    color: #1976d2; /* Change color on hover */
+    transform: scale(1.1); /* Slightly enlarge icon */
+  }
+}
+
+.title {
+  text-align: center;
+  flex-grow: 1;
+  font-size: 1.8em;
+  color: #007bff;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+button.cancel {
+  background-color: yellow !important;
+  color: black !important;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: background-color 0.3s, transform 0.3s;
+
+  &:disabled {
+    background-color: grey !important;
+    color: white !important;
+    cursor: not-allowed;
+  }
+}
+
+button.ok {
+  background-color: green !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: background-color 0.3s, transform 0.3s;
+
+  &:disabled {
+    background-color: grey !important;
+    color: white !important;
+    cursor: not-allowed;
+  }
+}
+
+button:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  box-shadow: inset 3px 3px 5px #999;
+  transform: translateY(2px);
+}
+
+.connections-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+.connections-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-height: calc(100vh - 120px); /* Adjust height to fit screen minus header height */
+  width: 100%;
+  overflow-y: auto; /* Only main content scrolls */
+}
+
+.connection-box {
+  background-color: lightgreen;
+  border: 1px solid #ccc;
+  padding: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &.selected {
+    background-color: rgb(68, 111, 240);
+    color: black;
+  }
+}

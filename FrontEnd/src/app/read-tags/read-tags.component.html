@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read Tags</title>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>Read Tags for Connection: {{ connection?.name }} ({{ connection?.ipAddress }})</h2>
+      <button class="back-button" (click)="goBack()">Back</button>
+    </div>
+
+    <div class="content">
+      <div *ngIf="loading" class="loading-message">
+        Loading tags...
+      </div>
+
+      <div *ngIf="!loading && tagValues && tagValues.length > 0" class="tag-list">
+        <!-- Common Header -->
+        <div class="list-header">
+          <div class="tag-column"><strong>TagList</strong></div>
+          <div class="value-column"><strong>TagValue</strong></div>
+        </div>
+
+        <!-- List of Tags and Values -->
+        <ul>
+          <li *ngFor="let tagValue of tagValues">
+            <div class="tag-column">{{ tagValue.tag }}</div>
+            <div class="value-column">{{ tagValue.value }}</div>
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="!loading && (!tagValues || tagValues.length === 0)" class="no-tags">
+        No tag values found.
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>* * * * *</p>
+    </div>
+  </div>
+</body>
+</html>

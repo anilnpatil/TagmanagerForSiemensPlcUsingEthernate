@@ -1,0 +1,116 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 25px;
+  background-color: #f9c2c3; /* Header background color specific to delete component */
+  border-bottom: 2px solid #cc0000; /* Header border */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.home-icon {
+  cursor: pointer;
+  font-size: 28px;
+  color: #d9534f; /* Icon color matching delete theme */
+  transition: transform 0.3s, color 0.3s;
+
+  &:hover {
+    color: #a94442; /* Darker red on hover */
+    transform: scale(1.2); /* Slightly enlarge icon */
+  }
+}
+
+.title {
+  text-align: center;
+  flex-grow: 1;
+  font-size: 1.6em;
+  color: #a94442; /* Title color for delete page */
+  font-weight: bold;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 15px;
+}
+
+button.cancel {
+  background-color: #f0ad4e !important; /* Warning-like color */
+  color: white !important;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 12px 25px;
+  transition: background-color 0.3s, transform 0.3s;
+
+  &:disabled {
+    background-color: lightgrey !important;
+    color: white !important;
+    cursor: not-allowed;
+  }
+}
+
+button.delete {
+  background-color: #d9534f !important; /* Danger red for delete */
+  color: white !important;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 12px 25px;
+  transition: background-color 0.3s, transform 0.3s;
+
+  &:disabled {
+    background-color: grey !important;
+    color: white !important;
+    cursor: not-allowed;
+  }
+}
+
+button:not(:disabled):hover {
+  transform: translateY(-3px);
+  background-color: darkred !important; /* Darker shade on hover */
+}
+
+button:active {
+  box-shadow: inset 4px 4px 6px #999;
+  transform: translateY(2px);
+}
+
+.connections-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: auto;
+  padding: 25px;
+}
+
+.connections-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  max-height: calc(100vh - 140px); /* Adjust height to fit screen minus header height */
+  width: 100%;
+  overflow-y: auto;
+}
+
+.connection-box {
+  background-color: #ffcccc; /* Light red to indicate deletion */
+  border: 1px solid #d9534f;
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: #ff6666; /* Highlighted red */
+    color: white;
+  }
+
+  &.selected {
+    background-color: darkred;
+    color: white;
+  }
+}

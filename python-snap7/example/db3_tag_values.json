@@ -1,0 +1,1178 @@
+[
+    {
+        "tag": "DB3_DBD0",
+        "value": 1.1
+    },
+    {
+        "tag": "DB3_DBD4",
+        "value": 1.2
+    },
+    {
+        "tag": "DB3_DBD8",
+        "value": 1.3
+    },
+    {
+        "tag": "DB3_DBD12",
+        "value": 1.4
+    },
+    {
+        "tag": "DB3_DBD16",
+        "value": 1.5
+    },
+    {
+        "tag": "DB3_DBD20",
+        "value": 1.6
+    },
+    {
+        "tag": "DB3_DBD24",
+        "value": 1.7
+    },
+    {
+        "tag": "DB3_DBD28",
+        "value": 1.8
+    },
+    {
+        "tag": "DB3_DBD32",
+        "value": 1.9
+    },
+    {
+        "tag": "DB3_DBD36",
+        "value": 2.0
+    },
+    {
+        "tag": "DB3_DBD40",
+        "value": 2.1
+    },
+    {
+        "tag": "DB3_DBD44",
+        "value": 2.2
+    },
+    {
+        "tag": "DB3_DBD48",
+        "value": 2.3
+    },
+    {
+        "tag": "DB3_DBD52",
+        "value": 2.4
+    },
+    {
+        "tag": "DB3_DBD56",
+        "value": 2.5
+    },
+    {
+        "tag": "DB3_DBD60",
+        "value": 2.6
+    },
+    {
+        "tag": "DB3_DBD64",
+        "value": 2.7
+    },
+    {
+        "tag": "DB3_DBD68",
+        "value": 2.8
+    },
+    {
+        "tag": "DB3_DBD72",
+        "value": 2.9
+    },
+    {
+        "tag": "DB3_DBD76",
+        "value": 3.0
+    },
+    {
+        "tag": "DB3_DBD80",
+        "value": 3.1
+    },
+    {
+        "tag": "DB3_DBD84",
+        "value": 3.2
+    },
+    {
+        "tag": "DB3_DBD88",
+        "value": 3.3
+    },
+    {
+        "tag": "DB3_DBD92",
+        "value": 3.4
+    },
+    {
+        "tag": "DB3_DBD96",
+        "value": 3.5
+    },
+    {
+        "tag": "DB3_DBD100",
+        "value": 3.6
+    },
+    {
+        "tag": "DB3_DBD104",
+        "value": 3.7
+    },
+    {
+        "tag": "DB3_DBD108",
+        "value": 3.8
+    },
+    {
+        "tag": "DB3_DBD112",
+        "value": 3.9
+    },
+    {
+        "tag": "DB3_DBD116",
+        "value": 4.0
+    },
+    {
+        "tag": "DB3_DBD120",
+        "value": 4.1
+    },
+    {
+        "tag": "DB3_DBD124",
+        "value": 4.2
+    },
+    {
+        "tag": "DB3_DBD128",
+        "value": 4.3
+    },
+    {
+        "tag": "DB3_DBD132",
+        "value": 4.4
+    },
+    {
+        "tag": "DB3_DBD136",
+        "value": 4.5
+    },
+    {
+        "tag": "DB3_DBD140",
+        "value": 4.6
+    },
+    {
+        "tag": "DB3_DBD144",
+        "value": 4.7
+    },
+    {
+        "tag": "DB3_DBD148",
+        "value": 4.8
+    },
+    {
+        "tag": "DB3_DBD152",
+        "value": 4.9
+    },
+    {
+        "tag": "DB3_DBD156",
+        "value": 5.0
+    },
+    {
+        "tag": "DB3_DBD160",
+        "value": 5.1
+    },
+    {
+        "tag": "DB3_DBD164",
+        "value": 5.2
+    },
+    {
+        "tag": "DB3_DBD168",
+        "value": 5.3
+    },
+    {
+        "tag": "DB3_DBD172",
+        "value": 5.4
+    },
+    {
+        "tag": "DB3_DBD176",
+        "value": 5.5
+    },
+    {
+        "tag": "DB3_DBD180",
+        "value": 5.6
+    },
+    {
+        "tag": "DB3_DBD184",
+        "value": 5.7
+    },
+    {
+        "tag": "DB3_DBD188",
+        "value": 5.8
+    },
+    {
+        "tag": "DB3_DBD192",
+        "value": 5.9
+    },
+    {
+        "tag": "DB3_DBD196",
+        "value": 6.0
+    },
+    {
+        "tag": "DB3_DBD200",
+        "value": 6.1
+    },
+    {
+        "tag": "DB3_DBD204",
+        "value": 6.2
+    },
+    {
+        "tag": "DB3_DBD208",
+        "value": 6.3
+    },
+    {
+        "tag": "DB3_DBD212",
+        "value": 6.4
+    },
+    {
+        "tag": "DB3_DBD216",
+        "value": 6.5
+    },
+    {
+        "tag": "DB3_DBD220",
+        "value": 6.6
+    },
+    {
+        "tag": "DB3_DBD224",
+        "value": 6.7
+    },
+    {
+        "tag": "DB3_DBD228",
+        "value": 6.8
+    },
+    {
+        "tag": "DB3_DBD232",
+        "value": 6.9
+    },
+    {
+        "tag": "DB3_DBD236",
+        "value": 7.0
+    },
+    {
+        "tag": "DB3_DBD240",
+        "value": 7.1
+    },
+    {
+        "tag": "DB3_DBD244",
+        "value": 7.2
+    },
+    {
+        "tag": "DB3_DBD248",
+        "value": 7.3
+    },
+    {
+        "tag": "DB3_DBD252",
+        "value": 7.4
+    },
+    {
+        "tag": "DB3_DBD256",
+        "value": 7.5
+    },
+    {
+        "tag": "DB3_DBD260",
+        "value": 7.6
+    },
+    {
+        "tag": "DB3_DBD264",
+        "value": 7.7
+    },
+    {
+        "tag": "DB3_DBD268",
+        "value": 7.8
+    },
+    {
+        "tag": "DB3_DBD272",
+        "value": 7.9
+    },
+    {
+        "tag": "DB3_DBD276",
+        "value": 8.0
+    },
+    {
+        "tag": "DB3_DBD280",
+        "value": 8.1
+    },
+    {
+        "tag": "DB3_DBD284",
+        "value": 8.2
+    },
+    {
+        "tag": "DB3_DBD288",
+        "value": 8.3
+    },
+    {
+        "tag": "DB3_DBD292",
+        "value": 8.4
+    },
+    {
+        "tag": "DB3_DBD296",
+        "value": 8.5
+    },
+    {
+        "tag": "DB3_DBD300",
+        "value": 8.6
+    },
+    {
+        "tag": "DB3_DBD304",
+        "value": 8.7
+    },
+    {
+        "tag": "DB3_DBD308",
+        "value": 8.8
+    },
+    {
+        "tag": "DB3_DBD312",
+        "value": 8.9
+    },
+    {
+        "tag": "DB3_DBD316",
+        "value": 9.0
+    },
+    {
+        "tag": "DB3_DBD320",
+        "value": 9.1
+    },
+    {
+        "tag": "DB3_DBD324",
+        "value": 9.2
+    },
+    {
+        "tag": "DB3_DBD328",
+        "value": 9.3
+    },
+    {
+        "tag": "DB3_DBD332",
+        "value": 9.4
+    },
+    {
+        "tag": "DB3_DBD336",
+        "value": 9.5
+    },
+    {
+        "tag": "DB3_DBD340",
+        "value": 9.6
+    },
+    {
+        "tag": "DB3_DBD344",
+        "value": 9.7
+    },
+    {
+        "tag": "DB3_DBD348",
+        "value": 9.8
+    },
+    {
+        "tag": "DB3_DBD352",
+        "value": 9.9
+    },
+    {
+        "tag": "DB3_DBD356",
+        "value": 10.0
+    },
+    {
+        "tag": "DB3_DBD360",
+        "value": 10.1
+    },
+    {
+        "tag": "DB3_DBD364",
+        "value": 10.2
+    },
+    {
+        "tag": "DB3_DBD368",
+        "value": 10.3
+    },
+    {
+        "tag": "DB3_DBD372",
+        "value": 10.4
+    },
+    {
+        "tag": "DB3_DBD376",
+        "value": 10.5
+    },
+    {
+        "tag": "DB3_DBD380",
+        "value": 10.6
+    },
+    {
+        "tag": "DB3_DBD384",
+        "value": 10.7
+    },
+    {
+        "tag": "DB3_DBD388",
+        "value": 10.8
+    },
+    {
+        "tag": "DB3_DBD392",
+        "value": 10.9
+    },
+    {
+        "tag": "DB3_DBD396",
+        "value": 11.0
+    },
+    {
+        "tag": "DB3_DBD400",
+        "value": 11.1
+    },
+    {
+        "tag": "DB3_DBD404",
+        "value": 11.2
+    },
+    {
+        "tag": "DB3_DBD408",
+        "value": 11.3
+    },
+    {
+        "tag": "DB3_DBD412",
+        "value": 11.4
+    },
+    {
+        "tag": "DB3_DBD416",
+        "value": 11.5
+    },
+    {
+        "tag": "DB3_DBD420",
+        "value": 11.6
+    },
+    {
+        "tag": "DB3_DBD424",
+        "value": 11.7
+    },
+    {
+        "tag": "DB3_DBD428",
+        "value": 11.8
+    },
+    {
+        "tag": "DB3_DBD432",
+        "value": 11.9
+    },
+    {
+        "tag": "DB3_DBD436",
+        "value": 12.0
+    },
+    {
+        "tag": "DB3_DBD440",
+        "value": 12.1
+    },
+    {
+        "tag": "DB3_DBD444",
+        "value": 12.2
+    },
+    {
+        "tag": "DB3_DBD448",
+        "value": 12.3
+    },
+    {
+        "tag": "DB3_DBD452",
+        "value": 12.4
+    },
+    {
+        "tag": "DB3_DBD456",
+        "value": 12.5
+    },
+    {
+        "tag": "DB3_DBD460",
+        "value": 12.6
+    },
+    {
+        "tag": "DB3_DBD464",
+        "value": 12.7
+    },
+    {
+        "tag": "DB3_DBD468",
+        "value": 12.8
+    },
+    {
+        "tag": "DB3_DBD472",
+        "value": 12.9
+    },
+    {
+        "tag": "DB3_DBD476",
+        "value": 13.0
+    },
+    {
+        "tag": "DB3_DBD480",
+        "value": 13.1
+    },
+    {
+        "tag": "DB3_DBD484",
+        "value": 13.2
+    },
+    {
+        "tag": "DB3_DBD488",
+        "value": 13.3
+    },
+    {
+        "tag": "DB3_DBD492",
+        "value": 13.4
+    },
+    {
+        "tag": "DB3_DBD496",
+        "value": 13.5
+    },
+    {
+        "tag": "DB3_DBD500",
+        "value": 13.6
+    },
+    {
+        "tag": "DB3_DBD504",
+        "value": 13.7
+    },
+    {
+        "tag": "DB3_DBD508",
+        "value": 13.8
+    },
+    {
+        "tag": "DB3_DBD512",
+        "value": 13.9
+    },
+    {
+        "tag": "DB3_DBD516",
+        "value": 14.0
+    },
+    {
+        "tag": "DB3_DBD520",
+        "value": 14.1
+    },
+    {
+        "tag": "DB3_DBD524",
+        "value": 14.2
+    },
+    {
+        "tag": "DB3_DBD528",
+        "value": 14.3
+    },
+    {
+        "tag": "DB3_DBD532",
+        "value": 14.4
+    },
+    {
+        "tag": "DB3_DBD536",
+        "value": 14.5
+    },
+    {
+        "tag": "DB3_DBD540",
+        "value": 14.6
+    },
+    {
+        "tag": "DB3_DBD544",
+        "value": 14.7
+    },
+    {
+        "tag": "DB3_DBD548",
+        "value": 14.8
+    },
+    {
+        "tag": "DB3_DBD552",
+        "value": 14.9
+    },
+    {
+        "tag": "DB3_DBD556",
+        "value": 15.0
+    },
+    {
+        "tag": "DB3_DBD560",
+        "value": 15.1
+    },
+    {
+        "tag": "DB3_DBD564",
+        "value": 15.2
+    },
+    {
+        "tag": "DB3_DBD568",
+        "value": 15.3
+    },
+    {
+        "tag": "DB3_DBD572",
+        "value": 15.4
+    },
+    {
+        "tag": "DB3_DBD576",
+        "value": 15.5
+    },
+    {
+        "tag": "DB3_DBD580",
+        "value": 15.6
+    },
+    {
+        "tag": "DB3_DBD584",
+        "value": 15.7
+    },
+    {
+        "tag": "DB3_DBD588",
+        "value": 15.8
+    },
+    {
+        "tag": "DB3_DBD592",
+        "value": 15.9
+    },
+    {
+        "tag": "DB3_DBD596",
+        "value": 16.0
+    },
+    {
+        "tag": "DB3_DBD600",
+        "value": 16.1
+    },
+    {
+        "tag": "DB3_DBD604",
+        "value": 16.2
+    },
+    {
+        "tag": "DB3_DBD608",
+        "value": 16.3
+    },
+    {
+        "tag": "DB3_DBD612",
+        "value": 16.4
+    },
+    {
+        "tag": "DB3_DBD616",
+        "value": 16.5
+    },
+    {
+        "tag": "DB3_DBD620",
+        "value": 16.6
+    },
+    {
+        "tag": "DB3_DBD624",
+        "value": 16.7
+    },
+    {
+        "tag": "DB3_DBD628",
+        "value": 16.8
+    },
+    {
+        "tag": "DB3_DBD632",
+        "value": 16.9
+    },
+    {
+        "tag": "DB3_DBD636",
+        "value": 17.0
+    },
+    {
+        "tag": "DB3_DBD640",
+        "value": 17.1
+    },
+    {
+        "tag": "DB3_DBD644",
+        "value": 17.2
+    },
+    {
+        "tag": "DB3_DBD648",
+        "value": 17.3
+    },
+    {
+        "tag": "DB3_DBD652",
+        "value": 17.4
+    },
+    {
+        "tag": "DB3_DBD656",
+        "value": 17.5
+    },
+    {
+        "tag": "DB3_DBD660",
+        "value": 17.6
+    },
+    {
+        "tag": "DB3_DBD664",
+        "value": 17.7
+    },
+    {
+        "tag": "DB3_DBD668",
+        "value": 17.8
+    },
+    {
+        "tag": "DB3_DBD672",
+        "value": 17.9
+    },
+    {
+        "tag": "DB3_DBD676",
+        "value": 18.0
+    },
+    {
+        "tag": "DB3_DBD680",
+        "value": 18.1
+    },
+    {
+        "tag": "DB3_DBD684",
+        "value": 18.2
+    },
+    {
+        "tag": "DB3_DBD688",
+        "value": 18.3
+    },
+    {
+        "tag": "DB3_DBD692",
+        "value": 18.4
+    },
+    {
+        "tag": "DB3_DBD696",
+        "value": 18.5
+    },
+    {
+        "tag": "DB3_DBD700",
+        "value": 18.6
+    },
+    {
+        "tag": "DB3_DBD704",
+        "value": 18.7
+    },
+    {
+        "tag": "DB3_DBD708",
+        "value": 18.8
+    },
+    {
+        "tag": "DB3_DBD712",
+        "value": 18.9
+    },
+    {
+        "tag": "DB3_DBD716",
+        "value": 19.0
+    },
+    {
+        "tag": "DB3_DBD720",
+        "value": 19.1
+    },
+    {
+        "tag": "DB3_DBD724",
+        "value": 19.2
+    },
+    {
+        "tag": "DB3_DBD728",
+        "value": 19.3
+    },
+    {
+        "tag": "DB3_DBD732",
+        "value": 19.4
+    },
+    {
+        "tag": "DB3_DBD736",
+        "value": 19.5
+    },
+    {
+        "tag": "DB3_DBD740",
+        "value": 19.6
+    },
+    {
+        "tag": "DB3_DBD744",
+        "value": 19.7
+    },
+    {
+        "tag": "DB3_DBD748",
+        "value": 19.8
+    },
+    {
+        "tag": "DB3_DBD752",
+        "value": 19.9
+    },
+    {
+        "tag": "DB3_DBD756",
+        "value": 20.0
+    },
+    {
+        "tag": "DB3_DBD760",
+        "value": 20.1
+    },
+    {
+        "tag": "DB3_DBD764",
+        "value": 20.2
+    },
+    {
+        "tag": "DB3_DBD768",
+        "value": 20.3
+    },
+    {
+        "tag": "DB3_DBD772",
+        "value": 20.4
+    },
+    {
+        "tag": "DB3_DBD776",
+        "value": 20.5
+    },
+    {
+        "tag": "DB3_DBD780",
+        "value": 20.6
+    },
+    {
+        "tag": "DB3_DBD784",
+        "value": 20.7
+    },
+    {
+        "tag": "DB3_DBD788",
+        "value": 20.8
+    },
+    {
+        "tag": "DB3_DBD792",
+        "value": 20.9
+    },
+    {
+        "tag": "DB3_DBD796",
+        "value": 21.0
+    },
+    {
+        "tag": "DB3_DBD800",
+        "value": 21.1
+    },
+    {
+        "tag": "DB3_DBD804",
+        "value": 21.2
+    },
+    {
+        "tag": "DB3_DBD808",
+        "value": 21.3
+    },
+    {
+        "tag": "DB3_DBD812",
+        "value": 21.4
+    },
+    {
+        "tag": "DB3_DBD816",
+        "value": 21.5
+    },
+    {
+        "tag": "DB3_DBD820",
+        "value": 21.6
+    },
+    {
+        "tag": "DB3_DBD824",
+        "value": 21.7
+    },
+    {
+        "tag": "DB3_DBD828",
+        "value": 21.8
+    },
+    {
+        "tag": "DB3_DBD832",
+        "value": 21.9
+    },
+    {
+        "tag": "DB3_DBD836",
+        "value": 22.0
+    },
+    {
+        "tag": "DB3_DBD840",
+        "value": 22.1
+    },
+    {
+        "tag": "DB3_DBD844",
+        "value": 22.2
+    },
+    {
+        "tag": "DB3_DBD848",
+        "value": 22.3
+    },
+    {
+        "tag": "DB3_DBD852",
+        "value": 22.4
+    },
+    {
+        "tag": "DB3_DBD856",
+        "value": 22.5
+    },
+    {
+        "tag": "DB3_DBD860",
+        "value": 22.6
+    },
+    {
+        "tag": "DB3_DBD864",
+        "value": 22.7
+    },
+    {
+        "tag": "DB3_DBD868",
+        "value": 22.8
+    },
+    {
+        "tag": "DB3_DBD872",
+        "value": 22.9
+    },
+    {
+        "tag": "DB3_DBD876",
+        "value": 23.0
+    },
+    {
+        "tag": "DB3_DBD880",
+        "value": 23.1
+    },
+    {
+        "tag": "DB3_DBD884",
+        "value": 23.2
+    },
+    {
+        "tag": "DB3_DBD888",
+        "value": 23.3
+    },
+    {
+        "tag": "DB3_DBD892",
+        "value": 23.4
+    },
+    {
+        "tag": "DB3_DBD896",
+        "value": 23.5
+    },
+    {
+        "tag": "DB3_DBD900",
+        "value": 23.6
+    },
+    {
+        "tag": "DB3_DBD904",
+        "value": 23.7
+    },
+    {
+        "tag": "DB3_DBD908",
+        "value": 23.8
+    },
+    {
+        "tag": "DB3_DBD912",
+        "value": 23.9
+    },
+    {
+        "tag": "DB3_DBD916",
+        "value": 24.0
+    },
+    {
+        "tag": "DB3_DBD920",
+        "value": 24.1
+    },
+    {
+        "tag": "DB3_DBD924",
+        "value": 24.2
+    },
+    {
+        "tag": "DB3_DBD928",
+        "value": 24.3
+    },
+    {
+        "tag": "DB3_DBD932",
+        "value": 24.4
+    },
+    {
+        "tag": "DB3_DBD936",
+        "value": 24.5
+    },
+    {
+        "tag": "DB3_DBD940",
+        "value": 24.6
+    },
+    {
+        "tag": "DB3_DBD944",
+        "value": 24.7
+    },
+    {
+        "tag": "DB3_DBD948",
+        "value": 24.8
+    },
+    {
+        "tag": "DB3_DBD952",
+        "value": 24.9
+    },
+    {
+        "tag": "DB3_DBD956",
+        "value": 25.0
+    },
+    {
+        "tag": "DB3_DBD960",
+        "value": 25.1
+    },
+    {
+        "tag": "DB3_DBD964",
+        "value": 25.2
+    },
+    {
+        "tag": "DB3_DBD968",
+        "value": 25.3
+    },
+    {
+        "tag": "DB3_DBD972",
+        "value": 25.4
+    },
+    {
+        "tag": "DB3_DBD976",
+        "value": 25.5
+    },
+    {
+        "tag": "DB3_DBD980",
+        "value": 25.6
+    },
+    {
+        "tag": "DB3_DBD984",
+        "value": 25.7
+    },
+    {
+        "tag": "DB3_DBD988",
+        "value": 25.8
+    },
+    {
+        "tag": "DB3_DBD992",
+        "value": 25.9
+    },
+    {
+        "tag": "DB3_DBD996",
+        "value": 26.0
+    },
+    {
+        "tag": "DB3_DBD1000",
+        "value": 26.1
+    },
+    {
+        "tag": "DB3_DBD1004",
+        "value": 26.2
+    },
+    {
+        "tag": "DB3_DBD1008",
+        "value": 26.3
+    },
+    {
+        "tag": "DB3_DBD1012",
+        "value": 26.4
+    },
+    {
+        "tag": "DB3_DBD1016",
+        "value": 26.5
+    },
+    {
+        "tag": "DB3_DBD1020",
+        "value": 26.6
+    },
+    {
+        "tag": "DB3_DBD1024",
+        "value": 26.7
+    },
+    {
+        "tag": "DB3_DBD1028",
+        "value": 26.8
+    },
+    {
+        "tag": "DB3_DBD1032",
+        "value": 26.9
+    },
+    {
+        "tag": "DB3_DBD1036",
+        "value": 27.0
+    },
+    {
+        "tag": "DB3_DBD1040",
+        "value": 27.1
+    },
+    {
+        "tag": "DB3_DBD1044",
+        "value": 27.2
+    },
+    {
+        "tag": "DB3_DBD1048",
+        "value": 27.3
+    },
+    {
+        "tag": "DB3_DBD1052",
+        "value": 27.4
+    },
+    {
+        "tag": "DB3_DBD1056",
+        "value": 27.5
+    },
+    {
+        "tag": "DB3_DBD1060",
+        "value": 27.6
+    },
+    {
+        "tag": "DB3_DBD1064",
+        "value": 27.7
+    },
+    {
+        "tag": "DB3_DBD1068",
+        "value": 27.8
+    },
+    {
+        "tag": "DB3_DBD1072",
+        "value": 27.9
+    },
+    {
+        "tag": "DB3_DBD1076",
+        "value": 28.0
+    },
+    {
+        "tag": "DB3_DBD1080",
+        "value": 28.1
+    },
+    {
+        "tag": "DB3_DBD1084",
+        "value": 28.2
+    },
+    {
+        "tag": "DB3_DBD1088",
+        "value": 28.3
+    },
+    {
+        "tag": "DB3_DBD1092",
+        "value": 28.4
+    },
+    {
+        "tag": "DB3_DBD1096",
+        "value": 28.5
+    },
+    {
+        "tag": "DB3_DBD1100",
+        "value": 28.6
+    },
+    {
+        "tag": "DB3_DBD1104",
+        "value": 28.7
+    },
+    {
+        "tag": "DB3_DBD1108",
+        "value": 28.8
+    },
+    {
+        "tag": "DB3_DBD1112",
+        "value": 28.9
+    },
+    {
+        "tag": "DB3_DBD1116",
+        "value": 29.0
+    },
+    {
+        "tag": "DB3_DBD1120",
+        "value": 29.1
+    },
+    {
+        "tag": "DB3_DBD1124",
+        "value": 29.2
+    },
+    {
+        "tag": "DB3_DBD1128",
+        "value": 29.3
+    },
+    {
+        "tag": "DB3_DBD1132",
+        "value": 29.4
+    },
+    {
+        "tag": "DB3_DBD1136",
+        "value": 29.5
+    },
+    {
+        "tag": "DB3_DBD1140",
+        "value": 29.6
+    },
+    {
+        "tag": "DB3_DBD1144",
+        "value": 29.7
+    },
+    {
+        "tag": "DB3_DBD1148",
+        "value": 29.8
+    },
+    {
+        "tag": "DB3_DBD1152",
+        "value": 29.9
+    },
+    {
+        "tag": "DB3_DBD1156",
+        "value": 30.0
+    },
+    {
+        "tag": "DB3_DBD1160",
+        "value": 30.1
+    },
+    {
+        "tag": "DB3_DBD1164",
+        "value": 30.2
+    },
+    {
+        "tag": "DB3_DBD1168",
+        "value": 30.3
+    },
+    {
+        "tag": "DB3_DBD1172",
+        "value": 30.4
+    }
+]
