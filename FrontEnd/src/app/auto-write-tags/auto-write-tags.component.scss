@@ -1,0 +1,135 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+  flex-shrink: 0;
+  background-color: #9af7cd;
+  padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ccc;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  h2 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #333;
+    padding-top: 10px;
+    }
+
+  .button-group .back-button {
+    padding: 0.7rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 7px;
+    background-color: #d3af2f;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f4be36;
+      color:brown
+    }
+  }
+}
+
+.data-table {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  background: white;
+  border-radius: 15px;
+  margin: -0.4rem 0.1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  min-height: 0;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 0.7fr 2fr 1.5fr 1fr 1.5fr;
+  padding: 0.8rem 1rem;
+  background-color: #343a40;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.table-body {
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 0.7fr 2fr 1.5fr 1fr 1.5fr;
+  padding: 0.8rem 1rem;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
+
+  .table-cell {
+    input {
+      width: 70%;
+      padding: 0.4rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 0.95rem;
+
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+      }
+
+      &[disabled] {
+        background-color: #f8f9fa;
+        opacity: 0.8;
+        cursor: not-allowed;
+      }
+    }
+
+    .tag-loading {
+      font-size: 0.75rem;
+      color: #007bff;
+      margin-left: 8px;
+    }
+  }
+
+  .success {
+    color: #28a745;
+    font-weight: 600;
+  }
+
+  .failed {
+    color: #dc3545;
+    font-weight: 600;
+  }
+}
+
+.footer {
+  flex-shrink: 0;
+  padding: 10px 0;
+  text-align: center;
+  background-color: #9af7cd;
+  border-top: 1px solid #ccc;
+  font-size: 0.9rem;
+  color: #495057;
+  position: sticky;
+  bottom: 0;
+}

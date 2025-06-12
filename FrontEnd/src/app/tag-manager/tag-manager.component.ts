@@ -48,6 +48,15 @@ export class TagManagerComponent implements OnInit {
     });
   }
 
+  navigateToScheduler() {
+  this.router.navigate(['/scheduler'], {
+    state: {
+      selectedTags: this.selectedTags,
+      connection: this.connection
+    }
+  });
+}
+
   navigateToReadTags(): void {
     if (this.connection) {
       this.router.navigate(['/read-tags'], { state: { connection: this.connection } });
@@ -227,6 +236,6 @@ export class TagManagerComponent implements OnInit {
   }
 
   goToHome(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home1']);
   }
 }

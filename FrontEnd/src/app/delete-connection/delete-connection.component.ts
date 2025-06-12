@@ -61,10 +61,10 @@ export class DeleteConnectionComponent implements OnInit {
   
   cancelDeletion(): void {
     this.selectedConnection = null; // Clear selection
-    this.router.navigate(['/']); // Navigate back to the home page
+    this.router.navigate(['/home1']); // Navigate back to the home page
   }  
 
   goToHome(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home1']);
   }
 }

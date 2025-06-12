@@ -1,0 +1,146 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(153deg, #1a5ac7, #1a5ac7, #7b27af);
+  font-family: 'Poppins', sans-serif;
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav.navbar {
+  width: 680px;
+  padding: 1rem 2rem;
+  margin-bottom: 1.5rem;
+  background-color: rgba(123, 123, 243, 0.2);
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(205, 244, 14, 0.597);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  h2 {
+    color: #ffffff;
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .user-management-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #ffb300;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #ffa000;
+    }
+  }
+}
+
+.home-icon {
+  cursor: pointer;
+  font-size: 30px;
+  color: #00ffbf;
+  transition: transform 0.3s, color 0.3s;
+
+  &:hover {
+    color: #19d23b;
+    transform: scale(1.1);
+  }
+}
+
+form {
+  width: 650px;
+  padding: 3rem;
+  background: rgba(20, 20, 220, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(128, 236, 239, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border: 1px solid rgba(205, 244, 14, 0.597);
+}
+
+input,
+select {
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(230, 238, 239, 0.912);
+  color: #120d0d;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: rgba(11, 10, 10, 0.6);
+  }
+
+  &:focus {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+}
+
+select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg width="10" height="5" viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 0l5 5 5-5H0z" fill=\"%23fff\"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+}
+
+button {
+  padding: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(25, 245, 117, 0.5);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    color: #666;
+  }
+}
+
+.success-message {
+  margin-top: 1.5rem;
+  width: 650px;
+  color: #4caf50;
+  font-weight: bold;
+  text-align: center;
+}
+
+.error-message {
+  margin-top: 1.5rem;
+  width: 650px;
+  color: #f44336;
+  font-weight: bold;
+  text-align: center;
+}

@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="header">
+    <h2>Scheduler Options</h2>
+    <button class="back-button" (click)="goBack()">Back</button>
+  </div>
+
+  <div class="content">
+    <div class="button-group">
+      <button (click)="goToScheduleReading(0)">Continuous Reading</button>
+      <button (click)="goToScheduleReading(1)">1 Second Reading</button> 
+      <button (click)="goToScheduleReading(2)">2 Second Reading</button>
+      <button (click)="goToScheduleReading(3)">3 Second Reading</button>
+      <button (click)="goToScheduleReading(4)">4 Second Reading</button>
+      <button (click)="goToScheduleReading(5)">5 Second Reading</button>   <!-- from these buttons 0 1 2 3 4 5 are the interval-->
+      <button (click)="goToAutoWrite()">Auto Write</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+      <p>* * * * *</p>
+    </div>

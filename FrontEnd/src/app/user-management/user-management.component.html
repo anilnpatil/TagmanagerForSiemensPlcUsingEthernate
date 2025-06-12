@@ -1,0 +1,86 @@
+<!-- <div class="navbar">
+  <mat-icon (click)="goToHome()" class="home-icon">home</mat-icon>
+  <h2>User Management</h2>
+  <input
+    type="text"
+    placeholder="Search users..."
+    [(ngModel)]="searchTerm"
+    (input)="applySearch()"
+    class="search-box"
+  />
+  <button class="back-button" (click)="goBack()">Back</button>
+</div>
+
+<-- Scrollable content starts here ->
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of filteredUsers">
+        <td>{{ user.username }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button class="delete-btn" (click)="confirmDelete(user.id)">🗑️</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p class="message" *ngIf="message">{{ message }}</p> -->
+
+
+
+<div class="navbar">
+  <mat-icon (click)="goToHome()" class="home-icon">home</mat-icon>
+  <h2>User Management</h2>
+  <input
+    type="text"
+    placeholder="Search users..."
+    [(ngModel)]="searchTerm"
+    (input)="applySearch()"
+    class="search-box"
+  />
+  <button class="back-button" (click)="goBack()">Back</button>
+</div>
+
+<!-- Scrollable content only inside tbody -->
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+  </table>
+
+  <div class="table-scroll">
+    <table>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers">
+          <td>{{ user.username }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button class="delete-btn" (click)="confirmDelete(user.id)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<p class="message" *ngIf="message">{{ message }}</p>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>© 2025 NextFirst User Management Panel</p>
+</footer>
+

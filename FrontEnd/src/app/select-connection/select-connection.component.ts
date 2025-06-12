@@ -58,6 +58,6 @@ export class SelectConnectionComponent implements OnInit {
   }
 
   goToHome(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home1']);
   }
 }

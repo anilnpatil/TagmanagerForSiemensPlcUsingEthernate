@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connections</title>  
+</head>
+<body>
+ <div class="menu-bar">
+    <button *ngIf="isAdmin()" mat-button (click)="navigateToAddConnection()">Add Connection</button>
+    <button mat-button (click)="openSelectConnection()">Select</button>
+    <button *ngIf="isAdmin()" mat-button (click)="openDeleteConnection()">Delete</button>
+    <button *ngIf="isAdmin()" mat-button (click)="openUserRegister()">Add User</button>
+    <!-- <mat-icon (click)="goToHome()" class="home-icon">home</mat-icon> -->
+    <button mat-button (click)="logout()">Logout</button>
+  </div>
+
+  <div class="header">
+    <h2>Available Connections</h2>
+  </div>
+  <div class="content">
+    <div class="connections-list">
+      <div *ngFor="let connection of connections" class="connection-box">
+        <div><strong>Name:</strong> {{ connection.name }}</div>
+        <div><strong>IP Address:</strong> {{ connection.ipAddress }}</div>
+        <div><strong>Gateway:</strong> {{ connection.gateway }}</div>
+        <div><strong>Subnet:</strong> {{ connection.subnet }}</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

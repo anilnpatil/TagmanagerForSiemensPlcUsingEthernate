@@ -50,12 +50,13 @@ body {
   gap: 10px;
 }
 
+button.scheduler,
 button.read-tags,
 button.write-tags {
   padding: 8px 16px;
   font-size: 16px;
   cursor: pointer; /* Adds pointer cursor on hover */
-  background-color: #007bff; /* White background */
+  background-color: #0073ff; /* blue background */
   color:#ffffff; /* Blue text */
   border: none;
   border-radius: 4px;
@@ -63,9 +64,14 @@ button.write-tags {
   transition: background-color 0.3s ease; /* Smooth hover transition */
 }
 
-button.read-tags:hover,
+button.read-tags:hover {
+  background-color: #3819d2; /* Light blue on hover */
+}
 button.write-tags:hover {
-  background-color: #1976d2; /* Light blue on hover */
+  background-color: #3819d2; /* Light blue on hover */
+}
+button.scheduler:hover {
+  background-color: #3819d2; /* Light blue on hover */
 }
 
 .connection-detail {

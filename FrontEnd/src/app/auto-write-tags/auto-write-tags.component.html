@@ -1,0 +1,53 @@
+<div class="container">
+  <!-- Fixed Header -->
+  <div class="header">
+    <h2>Auto Write Tags</h2>
+    <div class="button-group">
+      <button class="back-button" (click)="goBack()">Back</button>
+    </div>
+  </div>
+
+  <!-- Data table (non-scrolling wrapper) -->
+  <div class="data-table">
+    <!-- Sticky table headers -->
+    <div class="table-header">
+      <div class="header-cell tag-col">Tag Name</div>
+      <div class="header-cell">Value to Write</div>
+      <div class="header-cell">Value Written</div>
+      <div class="header-cell">Data Type</div>
+      <div class="header-cell">Status</div>
+    </div>
+
+    <!-- Scrollable table body -->
+    <div class="table-body">
+      <div *ngFor="let tag of tags" class="table-row">
+        <div class="table-cell tag-col">{{ tag.tag }}</div>
+        <div class="table-cell">
+          <input [(ngModel)]="tag.value"
+                 (ngModelChange)="onTagValueChange(tag, $event)"
+                 (blur)="onTagValueChange(tag, $event)"
+                 [disabled]="tag.isWriting"
+                 placeholder="Enter value" />
+          <span *ngIf="tag.isWriting" class="tag-loading">Writing...</span>
+        </div>
+        <div class="table-cell">{{ getTagResponseProperty(tag, 'value_written') }}</div>
+        <div class="table-cell">{{ getTagResponseProperty(tag, 'data_type') }}</div>
+        <div class="table-cell">
+          <span *ngIf="tag.response"
+                [class.success]="tag.response.status === 'Success'"
+                [class.failed]="tag.response.status === 'Failed'">
+            {{ tag.response.status }}
+            <div *ngIf="tag.response.status === 'Failed' && tag.response.message" class="error-message">
+              {{ tag.response.message }}
+            </div>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    PLC Tag Writer v1.0
+  </div>
+</div>

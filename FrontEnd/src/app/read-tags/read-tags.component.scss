@@ -35,19 +35,19 @@
   }
 
   .back-button {
-    background-color: #ebeb06;
-    color: rgb(12, 12, 243);
+    background-color: #d3af2f;;
+    color: white;
     border: none;
-    padding: 6px 25px;
-    border-radius: 3px;
+    padding: 0.7rem 2rem;
+    border-radius: 7px;
     font-size: 16px;
     cursor: pointer;
     flex-shrink: 0;
     margin-right: 30px;
 
     &:hover {
-      color: #ebeb06;
-      background-color: #1565c0;
+      background-color: #f4be36;
+      color:brown
     }
   }
 }
@@ -126,4 +126,14 @@
   border-radius: 0 0 8px 8px;
   font-size: 14px;
   z-index: 100;
+}
+
+.error-message {
+  color: #d32f2f;
+  background-color: #ffcdd2;
+  padding: 10px;
+  border: 1px solid #f44336;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-weight: bold;
 }

@@ -12,6 +12,7 @@ export class ReadTagsComponent implements OnInit {
   connection: Connection | null = null;
   tagValues: { tag: string, value: any }[] = [];
   loading: boolean = true; // Add the loading property
+   errorMessage: string = '';
 
   constructor(
     private http: HttpClient,
@@ -49,20 +50,41 @@ export class ReadTagsComponent implements OnInit {
       });
   }
 
-  fetchTagValues(tags: string[]) {
-    const tagUrl = `http://localhost:8083/getTagValues?ip=${this.connection?.ipAddress}`;
+  // fetchTagValues(tags: string[]) {
+  //   const tagUrl = `http://localhost:8083/getTagValues?ip=${this.connection?.ipAddress}`;
     
-    this.http.post<{ [key: string]: any }>(tagUrl, { tags }).subscribe({
-      next: (response) => {
-        // Access 'data' property using bracket notation
-        this.tagValues = Object.entries(response['data'] || {}).map(([tag, value]) => ({ tag, value }));
-        this.loading = false; // Data loaded
-      },
-      error: () => {
-        this.loading = false; // Handle error and stop loading
+  //   this.http.post<{ [key: string]: any }>(tagUrl, { tags }).subscribe({
+  //     next: (response) => {
+  //       // Access 'data' property using bracket notation
+  //       this.tagValues = Object.entries(response['data'] || {}).map(([tag, value]) => ({ tag, value }));
+  //       this.loading = false; // Data loaded
+  //     },
+  //     error: () => {
+  //       this.loading = false; // Handle error and stop loading
+  //     }
+  //   });
+  // }
+
+  fetchTagValues(tags: string[]) {
+  const tagUrl = `http://localhost:8083/getTagValues?ip=${this.connection?.ipAddress}`;
+  
+  this.http.post<{ [key: string]: any }>(tagUrl, { tags }).subscribe({
+    next: (response) => {
+      this.tagValues = Object.entries(response['data'] || {}).map(([tag, value]) => ({ tag, value }));
+      this.loading = false;
+      this.errorMessage = ''; // Clear error if successful
+    },
+    error: (err) => {
+      this.loading = false;
+      if (err.error && err.error.message) {
+        this.errorMessage = err.error.message;
+      } else {
+        this.errorMessage = 'An unknown error occurred while fetching tag values.';
       }
-    });
-  }
+    }
+  });
+}
+
     
 
   goBack(): void {

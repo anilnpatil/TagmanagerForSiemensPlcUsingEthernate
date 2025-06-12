@@ -1,0 +1,23 @@
+<div class="register-container">
+  <nav class="navbar">
+    <mat-icon (click)="goToHome()" class="home-icon">home</mat-icon>
+    <h2>Add User</h2>
+    <button class="user-management-button" routerLink="/user-management">User Management</button>
+  </nav>
+
+  <form (ngSubmit)="register()">
+    <input [(ngModel)]="username" name="username" placeholder="Username" required />
+    <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required />
+
+    <select [(ngModel)]="role" name="role" required>
+      <option value="USER">User</option>
+      <option value="ADMIN">Admin</option>
+    </select>
+
+    <button type="submit" [disabled]="!isFormValid()">Register</button>
+  </form>
+
+  <p *ngIf="message" [ngClass]="{ 'success-message': success, 'error-message': !success }">
+    {{ message }}
+  </p>
+</div>

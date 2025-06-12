@@ -36,6 +36,9 @@
       <div *ngIf="!loading && (!tagValues || tagValues.length === 0)" class="no-tags">
         No tag values found.
       </div>
+      <div *ngIf="!loading && errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
     </div>
 
     <div class="footer">

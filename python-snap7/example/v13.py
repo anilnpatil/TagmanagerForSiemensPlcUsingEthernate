@@ -1,6 +1,9 @@
+# this final tested code for s7 1200 plc 
+from datetime import datetime
+import random
 import snap7
 import struct
-from flask import Flask, request, jsonify
+from flask import Flask, Response, json, request, jsonify
 from flask_cors import CORS
 import logging
 import time
@@ -1186,6 +1189,99 @@ def insert_data_to_plc():
             "execution_time": f"{time.time()-start_time:.3f}s"
         }), 500
     
+@app.route('/getTagValuesByInterval', methods=['GET'])
+def get_tag_values_by_interval():
+    try:
+        interval = int(request.args.get('interval', 1))
+        tags_param = request.args.get('tags', '')
+        requested_tags = [tag.strip() for tag in tags_param.split(',') if tag.strip()]
+
+        if not requested_tags:
+            return jsonify({"message": "No tags specified"}), 400
+
+        def generate_dummy_data():
+            while True:
+                results = {
+                    tag: round(random.uniform(0, 100), 2) for tag in requested_tags
+                }
+
+                # Proper SSE format with double newlines
+                yield f"data: {json.dumps({
+                    'data': results,
+                    'timestamp': datetime.now().isoformat()
+                })}\n\n"
+
+                time.sleep(interval)
+
+        return Response(generate_dummy_data(), mimetype='text/event-stream')
+
+    except Exception as e:
+        return jsonify({
+            "message": "Initialization failed",
+            "error": str(e),
+            "error": True
+        }), 500
+
+
+# @app.route('/getTagValuesByInterval', methods=['GET'])
+# def get_tag_values_by_interval():
+#     try:
+#         plc_ip = request.args.get('ip', PLC_IP)
+#         interval = int(request.args.get('interval', 1))
+#         tags_param = request.args.get('tags', '')
+#         requested_tags = [tag.strip() for tag in tags_param.split(',') if tag.strip()]
+
+#         if not requested_tags:
+#             return jsonify({"message": "No tags specified"}), 400
+
+#         plc = get_plc_connection(plc_ip)
+#         if not plc:
+#             error_msg = f"Failed to connect to PLC at {plc_ip}. Check if PLC is reachable and credentials are correct."
+#             logger.error(error_msg)
+#             return jsonify({
+#                 "message": "PLC connection failed",
+#                 "details": error_msg
+#             }), 500
+
+#         def generate():
+#             try:
+#                 while True:
+#                     start_time = time.time()
+#                     results = batch_read_plc(plc, requested_tags)
+                    
+#                     if None in results.values():
+#                         error_msg = "One or more tags returned None. Check tag configurations."
+#                         yield f"data: {json.dumps({'message': error_msg, 'error': True})}\n\n"
+#                     else:
+#                         yield f"data: {json.dumps({
+#                             'data': results,
+#                             'timestamp': datetime.now().isoformat()
+#                         })}\n\n"
+
+#                     if interval > 0:
+#                         time.sleep(interval)
+#             except Exception as e:
+#                 yield f"data: {json.dumps({
+#                     'message': 'SSE stream failed',
+#                     'error': str(e),
+#                     'error': True
+#                 })}\n\n"
+#             finally:
+#                 if plc:
+#                     plc.disconnect()
+
+#         return Response(generate(), mimetype='text/event-stream')
+
+#     except Exception as e:
+#         logger.error(f"Endpoint error: {str(e)}")
+#         return jsonify({
+#             "message": "Initialization failed",
+#             "error": str(e),
+#             "error": True
+#         }), 500
+
+
+    
 @app.route('/getTagValues', methods=['POST'])
 def get_tag_values():
     start_time = time.time()
@@ -1214,8 +1310,10 @@ def get_tag_values():
             "message": "Read failed", 
             "error": str(e),
             "execution_time": f"{time.time()-start_time:.3f}s"
-        }), 500
+        }), 500    
 
+    
+    
 # -------------------------------
 # App Run
 # -------------------------------

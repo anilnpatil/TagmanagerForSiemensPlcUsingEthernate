@@ -1,38 +1,3 @@
-// // src/app/add-connection/add-connection.component.ts
-
-// import { Component } from '@angular/core';
-// import { Router } from '@angular/router';
-// import { ConnectionService } from '../services/connection.service';
-// import { Connection } from '../models/connection.model';
-
-// @Component({
-//   selector: 'app-add-connection',
-//   templateUrl: './add-connection.component.html',
-//   styleUrls: ['./add-connection.component.scss']
-// })
-// export class AddConnectionComponent {
-//   connection: Connection = { id: 0, name: '', ipAddress: '', subnet: '', gateway: '' };
-
-//   constructor(
-//     private router: Router,
-//     private connectionService: ConnectionService
-//   ) {}
-
-//   addConnection(): void {
-//     this.connectionService.addConnection(this.connection).subscribe(() => {
-//       this.clearForm();
-//       this.router.navigate(['/']);
-//     });
-//   }
-
-//   clearForm(): void {
-//     this.connection = { id: 0, name: '', ipAddress: '', subnet: '', gateway: '' };
-//   }
-
-//   goBack(): void {
-//     this.router.navigate(['/']);
-//   }
-// }
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConnectionService } from '../services/connection.service';
@@ -88,10 +53,10 @@ export class AddConnectionComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home1']);
   }
 
   goToHome(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home1']);
   }
 }
