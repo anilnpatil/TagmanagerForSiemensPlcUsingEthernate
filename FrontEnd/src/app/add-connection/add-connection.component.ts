@@ -31,7 +31,7 @@ export class AddConnectionComponent implements OnInit {
           this.successMessage = `Connection ${response.name} (${response.ipAddress}) saved successfully!`;
           setTimeout(() => {
             this.successMessage = '';
-            this.router.navigate(['/']);
+            this.router.navigate(['/home1']);
           }, 2000); // Show success message for 2 seconds before redirecting
         },
         error => {

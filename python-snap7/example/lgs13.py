@@ -1,8 +1,8 @@
+# this final tested code for s7 1200 plc 
 from datetime import datetime
 import random
 import snap7
 import struct
-from snap7.util import get_string  # ✅ New import for reliable STRING decoding
 from flask import Flask, Response, json, request, jsonify
 from flask_cors import CORS
 import logging
@@ -20,13 +20,13 @@ PLC_SLOT = 1
 PLC_PORT = 102
 MAX_DB_SIZE = 65536
 MAX_STRING_LENGTH = 254
-MIN_WRITE_INTERVAL = 0.05
-READ_CACHE_TTL = 0.1
+MIN_WRITE_INTERVAL = 0.05  # 50ms minimum between writes
+READ_CACHE_TTL = 0.1  # Cache reads for 100ms
 
 TAG_CONFIG = {
-    'DB1_DBD0': {'db': 1, 'offset': 0, 'dtype': 'DINT'},
-    'DB1_DBD2': {'db': 1, 'offset': 4, 'dtype': 'DINT'},
-    'DB1_DBD3': {'db': 1, 'offset': 8, 'dtype': 'DINT'},
+    'DB4_DBD0': {'db': 4, 'offset': 0, 'dtype': 'DINT'},
+    'DB4_DBD4': {'db': 4, 'offset': 4, 'dtype': 'DINT'},
+    'DB4_DBD8': {'db': 4, 'offset': 8, 'dtype': 'DINT'},
     'DB4_DBD12': {'db': 4, 'offset': 12, 'dtype': 'DINT'},
     'DB4_DBD16': {'db': 4, 'offset': 16, 'dtype': 'DINT'},
     'DB4_DBD20': {'db': 4, 'offset': 20, 'dtype': 'DINT'},
@@ -461,7 +461,7 @@ read_cache = {}
 last_cache_update = 0
 
 # -------------------------------
-# PLC Connection
+# Optimized PLC Connection
 # -------------------------------
 def get_plc_connection(ip=PLC_IP, max_retries=3):
     global plc_connection
@@ -470,27 +470,33 @@ def get_plc_connection(ip=PLC_IP, max_retries=3):
             try:
                 if plc_connection and plc_connection.get_connected():
                     return plc_connection
+                
                 if plc_connection:
                     try:
                         plc_connection.destroy()
                     except:
                         pass
+                
                 plc_connection = snap7.client.Client()
+                # Optimize connection parameters
                 plc_connection.set_connection_params(PLC_IP, PLC_RACK, PLC_SLOT)
-                plc_connection.set_connection_type(3)  # PG connection
+                plc_connection.set_connection_type(3)  # PG connection (more stable)
                 plc_connection.connect(PLC_IP, PLC_RACK, PLC_SLOT)
                 logger.info(f"Connected to PLC (attempt {attempt+1})")
                 return plc_connection
+                
             except Exception as e:
                 logger.warning(f"Connection attempt {attempt+1} failed: {str(e)}")
-                time.sleep(0.1 * (attempt + 1))
+                if attempt < max_retries - 1:
+                    time.sleep(0.1 * (attempt + 1))  # Exponential backoff
         return None
 
 # -------------------------------
-# Data Utilities
+# Optimized Data Utilities
 # -------------------------------
 @lru_cache(maxsize=128)
 def get_tag_config(tag):
+    """Cached tag configuration lookup"""
     return TAG_CONFIG.get(tag)
 
 def prepare_plc_data(tag, value):
@@ -520,11 +526,11 @@ def prepare_plc_data(tag, value):
 
         if not (0 <= offset < MAX_DB_SIZE) or not (0 <= offset + len(data) <= MAX_DB_SIZE):
             raise ValueError("Data offset/length out of bounds")
-
+            
         return db, offset, data
     except Exception as e:
         raise ValueError(f"Error preparing tag '{tag}': {e}")
-
+    
 def read_plc_value(plc, db, offset, dtype, max_length=None):
     try:
         if dtype == 'REAL':
@@ -535,25 +541,33 @@ def read_plc_value(plc, db, offset, dtype, max_length=None):
             return int.from_bytes(data, byteorder='big', signed=True)
         elif dtype == 'STRING':
             data = plc.db_read(db, offset, max_length + 2)
-            return get_string(data, 0, max_length).strip()
+            current_length = data[1]
+            return data[2:2+current_length].decode('ascii').strip('\x00')
         return None
     except Exception as e:
         logger.error(f"Read error: {str(e)}")
-        return None
+        return None    
 
 # -------------------------------
-# Batch Operations
+# Optimized Batch Operations
 # -------------------------------
 def batch_read_plc(plc, tags):
     global read_cache, last_cache_update
+    
+    # Check cache first
     current_time = time.time()
     if current_time - last_cache_update < READ_CACHE_TTL:
-        cached_results = {tag: read_cache[tag] for tag in tags if tag in read_cache}
+        cached_results = {}
+        for tag in tags:
+            if tag in read_cache:
+                cached_results[tag] = read_cache[tag]
         if len(cached_results) == len(tags):
             return cached_results
-
+    
     results = {}
     grouped = defaultdict(list)
+    
+    # Group and filter tags
     for tag in tags:
         config = get_tag_config(tag)
         if config:
@@ -561,12 +575,18 @@ def batch_read_plc(plc, tags):
         else:
             results[tag] = None
 
+    # Process each DB
     for db_num, tag_list in grouped.items():
         tag_list.sort(key=lambda x: x[1]['offset'])
         min_offset = tag_list[0][1]['offset']
-        max_offset = max(t[1]['offset'] + (t[1].get('max_length', 0) + 2 if t[1]['dtype'] == 'STRING' else 4) for t in tag_list)
+        max_cfg = max(tag_list, key=lambda x: x[1]['offset'] + (x[1].get('max_length', 0) + 2 if x[1]['dtype'] == 'STRING' else 4))
+        max_offset = max_cfg[1]['offset'] + (max_cfg[1].get('max_length', 0) + 2 if max_cfg[1]['dtype'] == 'STRING' else 4)
+        
         try:
+            # Read entire block once
             block = plc.db_read(db_num, min_offset, max_offset - min_offset)
+            
+            # Process all tags in this block
             for tag, cfg in tag_list:
                 start = cfg['offset'] - min_offset
                 try:
@@ -575,48 +595,58 @@ def batch_read_plc(plc, tags):
                     elif cfg['dtype'] == 'DINT':
                         results[tag] = int.from_bytes(block[start:start+4], byteorder='big', signed=True)
                     elif cfg['dtype'] == 'STRING':
-                        results[tag] = get_string(block[start:], 0, cfg['max_length']).strip()
+                        length = block[start+1]
+                        results[tag] = block[start+2:start+2+length].decode('ascii').strip('\x00')
                     else:
                         results[tag] = None
                 except Exception:
                     results[tag] = None
+                    
         except Exception:
             for tag, _ in tag_list:
                 results[tag] = None
-
+    
+    # Update cache
     read_cache.update(results)
     last_cache_update = current_time
     return results
 
 def batch_write_plc(plc, tag_value_pairs):
     global last_write_time
+    
     results = {}
     grouped = defaultdict(list)
-    value_mapping = {}
+    value_mapping = {}  # Track values for response
+    
+    # Rate limiting
     current_time = time.time()
     elapsed = current_time - last_write_time
     if elapsed < MIN_WRITE_INTERVAL:
         time.sleep(MIN_WRITE_INTERVAL - elapsed)
-
+    
+    # Group and prepare writes
     for tag, value in tag_value_pairs:
         config = get_tag_config(tag)
         if not config:
             results[tag] = {"status": "Failed", "error": "Tag not found"}
             continue
+            
         try:
             db, offset, data = prepare_plc_data(tag, value)
             grouped[db].append((offset, data, tag))
-            value_mapping[tag] = value
+            value_mapping[tag] = value  # Store original value
         except Exception as e:
             results[tag] = {"status": "Failed", "error": str(e)}
-
+    
+    # Process writes by DB
     for db_num, write_list in grouped.items():
         write_list.sort(key=lambda x: x[0])
         combined_writes = []
         current_offset = None
         current_data = bytearray()
         current_tags = []
-
+        
+        # Combine adjacent writes
         for offset, data, tag in write_list:
             if current_offset is not None and offset == current_offset + len(current_data):
                 current_data.extend(data)
@@ -627,9 +657,11 @@ def batch_write_plc(plc, tag_value_pairs):
                 current_offset = offset
                 current_data = bytearray(data)
                 current_tags = [tag]
+        
         if current_offset is not None:
             combined_writes.append((current_offset, bytes(current_data), current_tags))
-
+        
+        # Execute combined writes
         for offset, data, tags in combined_writes:
             try:
                 plc.db_write(db_num, offset, data)
@@ -638,12 +670,11 @@ def batch_write_plc(plc, tag_value_pairs):
             except Exception as e:
                 for tag in tags:
                     results[tag] = {"status": "Failed", "error": str(e)}
-
+    
     last_write_time = time.time()
     return results
-
 # -------------------------------
-# API Endpoints
+# Optimized API Endpoints
 # -------------------------------
 @app.route('/readDataTagsFromPlc', methods=['GET'])
 def read_tags():
@@ -656,16 +687,23 @@ def read_all_data():
         plc = get_plc_connection(plc_ip)
         if not plc:
             return jsonify({"message": "PLC connection failed"}), 500
-        results = {
-            tag_name: {
-                "value": read_plc_value(plc, config['db'], config['offset'], config['dtype'], config.get('max_length')),
-                "data_type": config['dtype']
-            } for tag_name, config in TAG_CONFIG.items()
-        }
+
+        results = {}
+        for tag_name, config in TAG_CONFIG.items():
+            value = read_plc_value(plc, config['db'], config['offset'], config['dtype'], config.get('max_length'))
+            results[tag_name] = {"value": value, "data_type": config['dtype']}
+
         plc.disconnect()
         return jsonify({"message": "Read successful", "data": results}), 200
     except Exception as e:
         return jsonify({"message": "Read failed", "error": str(e)}), 500
+
+import re  # Add this import at the top
+
+import re
+
+
+
 
 @app.route('/insertDataToPlc', methods=['POST'])
 def insert_data_to_plc():
@@ -673,29 +711,42 @@ def insert_data_to_plc():
     try:
         plc_ip = request.args.get('ip') or PLC_IP
         data_list = request.json
+        
         if not isinstance(data_list, list):
             return jsonify({"message": "Payload must be a list"}), 400
+
         plc = get_plc_connection(plc_ip)
         if not plc:
             return jsonify({"message": "Failed to connect to PLC"}), 500
-        value_mapping = {item['tag']: item['value'] for item in data_list if isinstance(item, dict) and 'tag' in item and 'value' in item}
+
+        # Create a mapping of tags to their original values for the response
+        value_mapping = {item['tag']: item['value'] 
+                        for item in data_list 
+                        if isinstance(item, dict) and 'tag' in item and 'value' in item}
+
         tag_value_pairs = list(value_mapping.items())
+
         with connection_lock:
             write_results = batch_write_plc(plc, tag_value_pairs)
-        results = {
-            tag: {
-                "data_type": get_tag_config(tag)['dtype'] if get_tag_config(tag) else "UNKNOWN",
+
+        # Build enhanced response without additional PLC operations
+        results = {}
+        for tag, result in write_results.items():
+            config = get_tag_config(tag)
+            results[tag] = {
+                "data_type": config['dtype'] if config else "UNKNOWN",
                 "status": result["status"],
                 "value_written": value_mapping.get(tag, None),
                 "error": result.get("error")
-            } for tag, result in write_results.items()
-        }
+            }
+
         logger.info(f"Write completed in {time.time()-start_time:.3f}s")
         return jsonify({
             "message": "Batch write completed",
             "execution_time": f"{time.time()-start_time:.3f}s",
             "data": results
         }), 200
+
     except Exception as e:
         logger.error(f"Write error: {str(e)}")
         return jsonify({
@@ -703,51 +754,133 @@ def insert_data_to_plc():
             "error": str(e),
             "execution_time": f"{time.time()-start_time:.3f}s"
         }), 500
+    
+# @app.route('/getTagValuesByInterval', methods=['GET'])
+# def get_tag_values_by_interval():
+#     try:
+#         interval = int(request.args.get('interval', 1))
+#         tags_param = request.args.get('tags', '')
+#         requested_tags = [tag.strip() for tag in tags_param.split(',') if tag.strip()]
 
+#         if not requested_tags:
+#             return jsonify({"message": "No tags specified"}), 400
+
+#         def generate_dummy_data():
+#             while True:
+#                 results = {
+#                     tag: round(random.uniform(0, 100), 2) for tag in requested_tags
+#                 }
+
+#                 # Proper SSE format with double newlines
+#                 yield f"data: {json.dumps({
+#                     'data': results,
+#                     'timestamp': datetime.now().isoformat()
+#                 })}\n\n"
+
+#                 time.sleep(interval)
+
+
+#         return Response(generate_dummy_data(), mimetype='text/event-stream')
+
+#     except Exception as e:
+#         return jsonify({
+#             "message": "Initialization failed",
+#             "error": str(e),
+#             "error": True
+#         }), 500
+
+
+@app.route('/getTagValuesByInterval', methods=['GET'])
+def get_tag_values_by_interval():
+    try:
+        plc_ip = request.args.get('ip', PLC_IP)
+        interval = int(request.args.get('interval', 1))
+        tags_param = request.args.get('tags', '')
+        requested_tags = [tag.strip() for tag in tags_param.split(',') if tag.strip()]
+
+        if not requested_tags:
+            return jsonify({"message": "No tags specified"}), 400
+
+        plc = get_plc_connection(plc_ip)
+        if not plc:
+            error_msg = f"Failed to connect to PLC at {plc_ip}. Check if PLC is reachable and credentials are correct."
+            logger.error(error_msg)
+            return jsonify({
+                "message": "PLC connection failed",
+                "details": error_msg
+            }), 500
+
+        def generate():
+            try:
+                while True:
+                    start_time = time.time()
+                    results = batch_read_plc(plc, requested_tags)
+                    
+                    if None in results.values():
+                        error_msg = "One or more tags returned None. Check tag configurations."
+                        yield f"data: {json.dumps({'message': error_msg, 'error': True})}\n\n"
+                    else:
+                        yield f"data: {json.dumps({
+                            'data': results,
+                            'timestamp': datetime.now().isoformat()
+                        })}\n\n"
+
+                    if interval > 0:
+                        time.sleep(interval)
+            except Exception as e:
+                yield f"data: {json.dumps({
+                    'message': 'SSE stream failed',
+                    'error': str(e),
+                    'error': True
+                })}\n\n"
+            finally:
+                if plc:
+                    plc.disconnect()
+
+        return Response(generate(), mimetype='text/event-stream')
+
+    except Exception as e:
+        logger.error(f"Endpoint error: {str(e)}")
+        return jsonify({
+            "message": "Initialization failed",
+            "error": str(e),
+            "error": True
+        }), 500
+
+
+    
 @app.route('/getTagValues', methods=['POST'])
 def get_tag_values():
     start_time = time.time()
     try:
         plc_ip = request.args.get('ip') or PLC_IP
         requested_tags = request.json.get('tags', [])
+
         if not requested_tags:
             return jsonify({"message": "No tags specified"}), 400
+
         plc = get_plc_connection(plc_ip)
         if not plc:
             return jsonify({"message": "PLC connection failed"}), 500
+
         results = batch_read_plc(plc, requested_tags)
+        
         logger.info(f"Read completed in {time.time()-start_time:.3f}s")
         return jsonify({
             "data": results,
             "execution_time": f"{time.time()-start_time:.3f}s"
         }), 200
+        
     except Exception as e:
         logger.error(f"Read error: {str(e)}")
         return jsonify({
-            "message": "Read failed",
+            "message": "Read failed", 
             "error": str(e),
             "execution_time": f"{time.time()-start_time:.3f}s"
-        }), 500
+        }), 500    
 
-@app.route('/getTagValuesByInterval', methods=['GET'])
-def get_tag_values_by_interval():
-    try:
-        interval = int(request.args.get('interval', 1))
-        tags_param = request.args.get('tags', '')
-        requested_tags = [tag.strip() for tag in tags_param.split(',') if tag.strip()]
-        if not requested_tags:
-            return jsonify({"message": "No tags specified"}), 400
-
-        def generate_dummy_data():
-            while True:
-                results = {tag: round(random.uniform(0, 100), 2) for tag in requested_tags}
-                yield f"data: {json.dumps({'data': results, 'timestamp': datetime.now().isoformat()})}\n\n"
-                time.sleep(interval)
-
-        return Response(generate_dummy_data(), mimetype='text/event-stream')
-    except Exception as e:
-        return jsonify({"message": "Initialization failed", "error": str(e)}), 500
-
+    
+    
 # -------------------------------
 # App Run
 # -------------------------------

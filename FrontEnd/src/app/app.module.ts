@@ -34,6 +34,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthService } from './auth.service';
 import { HomeComponent } from './home/home.component';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,12 @@ import { UserManagementComponent } from './user-management/user-management.compo
     MatCardModule,                // Useful for card layouts
     MatToolbarModule              // Useful for headers
   ],
-  providers: [AuthService],
+  providers: [AuthService , 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

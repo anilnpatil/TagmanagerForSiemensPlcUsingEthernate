@@ -27,9 +27,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**","api/**","/getSavedTagsById","/tagValues/**","/saveSelectedTags","/user/**").permitAll()
+                        .requestMatchers("/auth/**","api/**","/getSavedTagsById").permitAll() //,"/getSavedTagsById","/tagValues/**","/saveSelectedTags","/user/**"
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
-                        .requestMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/user/**","/getSavedTagsById","/tagValues/**","/saveSelectedTags").hasAnyAuthority
+                        ("USER", "ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .userDetailsService(userDetailsService)

@@ -18,25 +18,56 @@ import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { RoleGuard } from './guards/role.guard';
 
+
+// const routes: Routes = [
+//   { path: '', component: HomeComponent },
+//   { path: 'home1', component: Home1Component, canActivate: [AuthGuard] }, // 👈 Protected
+//   { path: 'add-connection', component: AddConnectionComponent, canActivate: [AuthGuard] }, // 👈 Protected },  
+//   { path: 'select-connection', component: SelectConnectionComponent, canActivate: [AuthGuard] }, // 👈 Protected },
+//   { path: 'delete-connection', component: DeleteConnectionComponent, canActivate: [AuthGuard] }, // 👈 Protected },
+//   { path: 'tag-manager', component: TagManagerComponent, canActivate: [AuthGuard] }, // 👈 Protected },
+//   { path: 'read-tags', component: ReadTagsComponent },
+//   { path: 'write-tags', component: WriteTagsComponent },
+//   { path: 'scheduler', component: SchedulerComponent},
+//   { path: 'schedule-reading', component:ScheduleReadingComponent},
+//   { path: 'auto-write-tags', component: AutoWriteTagsComponent},
+//   { path: 'login', component: LoginComponent },
+//   { path: 'register', component: RegisterComponent },
+//   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }, // 👈 Protected } 
+//   { path: 'user-management', component: UserManagementComponent}
+// ];
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'home1', component: Home1Component, canActivate: [AuthGuard] }, // 👈 Protected
-  { path: 'add-connection', component: AddConnectionComponent, canActivate: [AuthGuard] }, // 👈 Protected },  
-  { path: 'select-connection', component: SelectConnectionComponent, canActivate: [AuthGuard] }, // 👈 Protected },
-  { path: 'delete-connection', component: DeleteConnectionComponent, canActivate: [AuthGuard] }, // 👈 Protected },
-  { path: 'tag-manager', component: TagManagerComponent, canActivate: [AuthGuard] }, // 👈 Protected },
-  { path: 'read-tags', component: ReadTagsComponent },
-  { path: 'write-tags', component: WriteTagsComponent },
-  { path: 'scheduler', component: SchedulerComponent},
-  { path: 'schedule-reading', component:ScheduleReadingComponent},
-  { path: 'auto-write-tags', component: AutoWriteTagsComponent},
+
+  // Any logged-in user
+  { path: 'home1', component: Home1Component, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+
+  // Admin only
+  { path: 'add-connection', component: AddConnectionComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['ADMIN'] } },
+  { path: 'delete-connection', component: DeleteConnectionComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['ADMIN'] } },
+  { path: 'user-management', component: UserManagementComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['ADMIN'] } },
+
+  // USER or ADMIN access
+  { path: 'select-connection', component: SelectConnectionComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
+  { path: 'tag-manager', component: TagManagerComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
+  { path: 'read-tags', component: ReadTagsComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
+  { path: 'write-tags', component: WriteTagsComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
+  { path: 'scheduler', component: SchedulerComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
+  { path: 'schedule-reading', component: ScheduleReadingComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
+  { path: 'auto-write-tags', component: AutoWriteTagsComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
+
+  // Public
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }, // 👈 Protected } 
-  { path: 'user-management', component: UserManagementComponent}
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard, RoleGuard], data:{expectedRoles: ['ADMIN']} },
+
+  // Unauthorized fallback
+  { path: 'unauthorized', component: HomeComponent },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

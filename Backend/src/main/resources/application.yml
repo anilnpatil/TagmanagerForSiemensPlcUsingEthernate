@@ -5,13 +5,24 @@ spring:
   application:
     name: NextFirstTagManagement
 
+  # datasource:
+  #   url: jdbc:mysql://localhost:3306/tagsmanagement
+  #   username: root
+  #   password: mysql
+  #   driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # jpa:
+  #   hibernate:
+  #     ddl-auto: update
+  #   database-platform: org.hibernate.dialect.MySQL8Dialect
+
   datasource:
-    url: jdbc:mysql://localhost:3306/tagsmanagement
-    username: root
-    password: mysql
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/tag_management
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
       ddl-auto: update
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

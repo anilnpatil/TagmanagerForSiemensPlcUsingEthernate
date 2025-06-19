@@ -31,18 +31,7 @@ public class AuthController {
     private AuthenticationManager authManager;
 
     @Autowired
-    private JwtUtil jwtUtil;
-
-    // @PostMapping("/register")
-    // public String register(@RequestBody RegisterRequest req) {
-    //     User user = User.builder()
-    //             .username(req.getUsername())
-    //             .password(encoder.encode(req.getPassword()))
-    //             .role(req.getRole())
-    //             .build();
-    //     userRepo.save(user);
-    //     return "User registered successfully";
-    // }
+    private JwtUtil jwtUtil; 
     
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> register(@RequestBody RegisterRequest req) {
@@ -63,8 +52,7 @@ public class AuthController {
         }
     }
 
-
-    @PostMapping("/login")
+@PostMapping("/login")
 public Map<String, String> login(@RequestBody AuthRequest req) {
     authManager.authenticate(
         new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword())
