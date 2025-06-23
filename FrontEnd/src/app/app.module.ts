@@ -36,6 +36,7 @@ import { HomeComponent } from './home/home.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { TagValueHistoryComponent } from './tag-value-history/tag-value-history.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     LoginComponent,
     DashboardComponent,
     HomeComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    TagValueHistoryComponent
   ],
   imports: [
     BrowserModule,

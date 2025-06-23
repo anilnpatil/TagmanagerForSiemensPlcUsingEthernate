@@ -54,6 +54,19 @@ export class SchedulerComponent {
     this.router.navigate(['/auto-write-tags']);
   }
 
+  goToViewHistory(): void {
+  const storedConnection = localStorage.getItem('selectedConnection');
+  if (storedConnection) {
+    this.connection = JSON.parse(storedConnection);
+    this.router.navigate(['/tag-value-history'], {
+      state: {
+        connection: this.connection
+      }
+    });
+  }
+}
+
+
   goBack(): void {
     this.router.navigate(['/tag-manager']);
   }

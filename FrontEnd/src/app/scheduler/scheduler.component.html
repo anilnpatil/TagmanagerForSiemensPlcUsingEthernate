@@ -1,6 +1,7 @@
 <div class="container">
   <div class="header">
     <h2>Scheduler Options</h2>
+    <h2>Active Connection: {{ connection?.name }} ({{ connection?.ipAddress }})</h2>
     <button class="back-button" (click)="goBack()">Back</button>
   </div>
 
@@ -13,6 +14,7 @@
       <button (click)="goToScheduleReading(4)">4 Second Reading</button>
       <button (click)="goToScheduleReading(5)">5 Second Reading</button>   <!-- from these buttons 0 1 2 3 4 5 are the interval-->
       <button (click)="goToAutoWrite()">Auto Write</button>
+      <button (click)="goToViewHistory()">View History</button>
     </div>
   </div>
 </div>

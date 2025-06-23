@@ -1,128 +1,3 @@
-// import { Component, OnInit, OnDestroy } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Router } from '@angular/router';
-// import { Connection } from '../models/connection.model';
-
-// @Component({
-//   selector: 'app-schedule-reading',
-//   templateUrl: './schedule-reading.component.html',
-//   styleUrls: ['./schedule-reading.component.scss']
-// })
-// export class ScheduleReadingComponent implements OnInit, OnDestroy {
-//   connection: Connection | null = null;
-//   interval: number = 0;
-//   tagValues: { tag: string; value: any; timestamp?: Date }[] = [];
-//   loading = true;
-//   errorMessage: string | null = null;
-//   lastUpdated: Date | null = null;
-
-//   private eventSource: EventSource | null = null;
-//   private savedTags: string[] = [];
-
-//   constructor(private http: HttpClient, private router: Router) {}
-
-//   ngOnInit(): void {
-//     const state = history.state;
-//     this.connection = state['connection'];
-//     this.interval = state['interval'] ?? 0;
-
-//     if (this.connection) {
-//       this.fetchSavedTags();
-//     } else {
-//       this.router.navigate(['/']);
-//     }
-//   }
-
-//   ngOnDestroy(): void {
-//     this.closeEventSource();
-//   }
-
-//   private closeEventSource(): void {
-//     if (this.eventSource) {
-//       this.eventSource.close();
-//       this.eventSource = null;
-//     }
-//   }
-
-//   fetchSavedTags(): void {
-//     if (!this.connection) return;
-
-//     const connectionId = this.connection.id;
-//     this.http.get<string[]>(`http://localhost:8081/getSavedTagsById?connectionId=${connectionId}`)
-//       .subscribe({
-//         next: (tags) => {
-//           if (tags.length > 0) {
-//             this.savedTags = tags;
-//             this.startSSEConnection(tags);
-//           } else {
-//             this.loading = false;
-//             this.tagValues = [];
-//           }
-//         },
-//         error: () => {
-//           this.loading = false;
-//           this.errorMessage = 'Failed to load saved tags.';
-//         }
-//       });
-//   }
-
-//   private startSSEConnection(tags: string[]): void {
-//     if (!this.connection) return;
-
-//     this.closeEventSource();
-    
-//     const tagsParam = encodeURIComponent(tags.join(','));
-//     const url = `http://localhost:8083/getTagValuesByInterval?ip=${this.connection.ipAddress}&interval=${this.interval}&tags=${tagsParam}`;
-
-//     this.loading = true;
-//     this.errorMessage = null;
-
-//     this.eventSource = new EventSource(url);
-
-//     this.eventSource.addEventListener('message', (event) => {
-//       try {
-//         // Remove the "data: " prefix if present
-//         const dataStr = event.data.startsWith('data: ') ? event.data.substring(6) : event.data;
-//         const response = JSON.parse(dataStr);
-
-//         if (response.error) {
-//           this.handleError(response.message || 'Server error');
-//           return;
-//         }
-
-//         this.tagValues = Object.entries(response.data).map(([tag, value]) => ({
-//           tag,
-//           value: value !== null ? value : 'N/A',
-//           timestamp: new Date(response.timestamp)
-//         }));
-        
-//         this.lastUpdated = new Date();
-//         this.loading = false;
-//       } catch (e) {
-//         console.error('Error parsing SSE data:', e);
-//         this.handleError('Error processing data from server');
-//       }
-//     });
-
-//     this.eventSource.addEventListener('error', () => {
-//       if (!this.errorMessage) {
-//         this.handleError('Connection to server failed');
-//       }
-//       this.closeEventSource();
-//     });
-//   }
-
-//   private handleError(message: string): void {
-//     this.errorMessage = message;
-//     this.loading = false;
-//     this.closeEventSource();
-//   }
-
-//   goBack(): void {
-//     this.router.navigate(['/tag-manager']);
-//   }
-// }
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -228,11 +103,16 @@ export class ScheduleReadingComponent implements OnInit, OnDestroy {
         this.loading = false;
 
         // Send data to save endpoint
+        // this.saveDataToDatabase({
+        //   connectionId: this.connection?.id,
+        //   //ipAddress: this.connection?.ipAddress,
+        //   tagValues: this.tagValues,
+        //   timestamp: response.timestamp
+        // });
         this.saveDataToDatabase({
           connectionId: this.connection?.id,
-          //ipAddress: this.connection?.ipAddress,
-          tagValues: this.tagValues,
-          timestamp: response.timestamp
+          timestamp: response.timestamp,
+          tagValues: this.convertTagArrayToMap(this.tagValues)
         });
 
       } catch (e) {
@@ -248,6 +128,15 @@ export class ScheduleReadingComponent implements OnInit, OnDestroy {
       this.closeEventSource();
     });
   }
+
+  private convertTagArrayToMap(tagArray: { tag: string; value: any }[]): { [key: string]: any } {
+  const map: { [key: string]: any } = {};
+  tagArray.forEach(tagObj => {
+    map[tagObj.tag] = tagObj.value;
+  });
+  return map;
+}
+
 
   private saveDataToDatabase(data: any): void {
     this.saveStatus = 'saving';

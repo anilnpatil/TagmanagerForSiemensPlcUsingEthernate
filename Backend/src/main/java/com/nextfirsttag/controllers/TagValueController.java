@@ -19,7 +19,7 @@ public class TagValueController {
     @Autowired
     private TagValueService tagValueService;
 
-    @PostMapping("/save")
+@PostMapping("/save")
 public ResponseEntity<Map<String, String>> saveTagValues(@RequestBody TagValueRequest request) {
     tagValueService.saveTagValues(request);
     Map<String, String> response = new HashMap<>();
@@ -31,7 +31,7 @@ public ResponseEntity<Map<String, String>> saveTagValues(@RequestBody TagValueRe
     @GetMapping("/byConnection")
     public ResponseEntity<?> getByConnection(@RequestParam Long connectionId,
                                              @RequestParam(defaultValue = "0") int page,
-                                             @RequestParam(defaultValue = "10") int size) {
+                                             @RequestParam(defaultValue = "15") int size) {
         return ResponseEntity.ok(tagValueService.getTagValuesByConnection(connectionId, PageRequest.of(page, size)));
     }
 }

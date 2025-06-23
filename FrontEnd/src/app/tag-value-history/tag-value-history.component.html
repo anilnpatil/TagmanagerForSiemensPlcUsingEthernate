@@ -1,0 +1,45 @@
+<div class="tag-history-container">
+  <!-- Fixed Heading -->
+  <h2 class="heading">
+    Tag History for:
+    <span *ngIf="connection">
+      {{ connection.name || connection.ipAddress }} (ID: {{ connection.id }})
+    </span>
+  </h2>
+
+  <!-- Scrollable Table Area -->
+  <div class="content-padding">
+    <div *ngIf="loading" class="loading">Loading...</div>
+    <div *ngIf="!loading && tagData.length === 0" class="no-data">No tag data found.</div>
+
+    <div class="table-scroll-wrapper" *ngIf="tagData.length > 0">
+      <div class="table-scroll">
+        <table class="tag-table">
+          <thead>
+            <tr>
+              <th class="sticky-col">Timestamp</th>
+              <ng-container *ngFor="let key of getTagKeys(tagData[0])">
+                <th>{{ key }}</th>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of tagData">
+              <td class="sticky-col">{{ row.timestamp }}</td>
+              <ng-container *ngFor="let key of getTagKeys(tagData[0])">
+                <td>{{ row.tagValues[key] || '-' }}</td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fixed Pagination -->
+  <div class="pagination-fixed">
+    <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">Previous</button>
+    <span>Page {{ currentPage + 1 }} of {{ totalPages() }}</span>
+    <button (click)="onPageChange(currentPage + 1)" [disabled]="(currentPage + 1) >= totalPages()">Next</button>
+  </div>
+</div>

@@ -19,6 +19,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { RoleGuard } from './guards/role.guard';
+import { TagValueHistoryComponent } from './tag-value-history/tag-value-history.component';
 
 
 // const routes: Routes = [
@@ -63,7 +64,7 @@ const routes: Routes = [
   // Public
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard, RoleGuard], data:{expectedRoles: ['ADMIN']} },
-
+  { path: 'tag-value-history', component: TagValueHistoryComponent, canActivate: [AuthGuard, RoleGuard], data:{expectedRoles: ['USER', 'ADMIN']} },
   // Unauthorized fallback
   { path: 'unauthorized', component: HomeComponent },
 ];

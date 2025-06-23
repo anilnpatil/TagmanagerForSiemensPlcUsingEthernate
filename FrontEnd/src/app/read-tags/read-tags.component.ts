@@ -84,7 +84,6 @@ export class ReadTagsComponent implements OnInit {
     }
   });
 }
-
     
 
   goBack(): void {

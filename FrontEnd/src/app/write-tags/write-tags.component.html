@@ -8,7 +8,7 @@
 <body>
   <div class="container">
     <div class="header">
-      <h2>Write Tag Values</h2>
+      <h2>Write Tag Values to: {{ connection?.name }} ({{ connection?.ipAddress }})</h2>
       <div class="button-group">
         <button class="write-button" 
                 [disabled]="!canWriteTags()" 
