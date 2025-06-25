@@ -1,9 +1,11 @@
 <div class="schedule-reading-container">
   <div class="header">
     <h2>
+      <button class="home-button" (click)="goHome()">🏠</button>
       Read Tags for Connection: {{ connection?.name }} ({{ connection?.ipAddress }}) (Every {{ interval }}s)
     </h2>
     <div class="header-controls">
+      <button class="stop-button" (click)="stopBackground()">⛔ Stop</button>
       <button class="back-button" (click)="goBack()">Back</button>
       <div class="status-indicator">
         <div class="led" [ngClass]="{
@@ -17,17 +19,24 @@
   </div>
 
   <div class="content">
-    <div *ngIf="loading" class="loading-state">
+    <!-- Error State (Highest Priority) -->
+    <div *ngIf="errorMessage" class="error-state">
+      <button class="close-button" (click)="clearError()">×</button>
+      <div class="error-icon">⚠️</div>
+      <h3>Connection Error</h3>
+      <p class="error-details">{{ errorMessage }}</p>
+      <button class="retry-button" (click)="fetchSavedTags()">
+        <span class="refresh-icon">↻</span> Retry Connection
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading && !errorMessage" class="loading-state">
       <div class="spinner"></div>
       <p>Loading tag values...</p>
     </div>
 
-    <div *ngIf="!loading && errorMessage" class="error-state">
-      <div class="error-icon">⚠️</div>
-      <h3>Error Reading Tag Values</h3>
-      <p>{{ errorMessage }}</p>
-    </div>
-
+    <!-- Success State (Tag Values) -->
     <div *ngIf="!loading && !errorMessage && tagValues.length > 0" class="tag-table-container">
       <div class="table-wrapper">
         <table class="tag-table">
@@ -49,6 +58,7 @@
       </div>
     </div>
 
+    <!-- Empty State (Only when truly empty) -->
     <div *ngIf="!loading && !errorMessage && tagValues.length === 0" class="empty-state">
       <div class="empty-icon">ℹ️</div>
       <p>No tag values found.</p>

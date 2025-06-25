@@ -1,11 +1,16 @@
 <div class="tag-history-container">
+  <div class="header">    
+    <h2> <span *ngIf="connection">Tag History for: {{ connection?.name }} ({{ connection?.ipAddress }})</span> </h2>
+    <button class="back-button" (click)="goBack()">Back</button>
+  </div>
   <!-- Fixed Heading -->
-  <h2 class="heading">
+  <!-- <h2 class="heading">
     Tag History for:
     <span *ngIf="connection">
       {{ connection.name || connection.ipAddress }} (ID: {{ connection.id }})
     </span>
-  </h2>
+    <button class="back-button" (click)="goBack()">Back</button>
+  </h2> -->
 
   <!-- Scrollable Table Area -->
   <div class="content-padding">

@@ -10,28 +10,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #9af7cd; /* Blue background color */
+  background-color: #9af7cd;
   color: #007bff;
-  width: 98%; /* Full-width header */
-  padding: 10px 20px; /* Padding for content spacing */
+  width: 98%;
+  padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 900;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   margin-bottom: 30px;
-//   padding: 12px 12px;
-//   font-size: 20px; 
-//   background-color: #0091ff; /* blue background */
-//   color:#110d0d; /* Blue text */
-//   border: none;
-//   border-radius: 4px;
-//   margin-right: 30px;
-// 
 }
 
 .content {
@@ -39,6 +27,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 60px; // Add margin to account for fixed header
 }
 
 .button-group {
@@ -47,7 +36,6 @@
   gap: 60px;
   width: 100%;
   max-width: 600px;
-  
 }
 
 button {
@@ -56,12 +44,18 @@ button {
   border: none;
   border-radius: 5px;
   background-color: #3367d6;
-  color: rgb(255, 255, 255);
+  color: white;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: #aa42f4;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #cccccc;
   }
 }
 
@@ -77,7 +71,7 @@ button {
   
   &:hover {
     background-color: #f4be36;
-    color:brown
+    color: brown;
   }
 }
 
@@ -86,10 +80,23 @@ button {
   bottom: 0;
   width: 100%;
   background-color: #9af7cd;
-  color:#077213;;
+  color: #077213;
   text-align: center;
   padding: 10px 0;
   border-radius: 0 0 8px 8px;
   font-size: 14px;
   z-index: 100;
+}
+
+.button-group button.active {
+  background-color: #1976d2;
+  color: white;
+  border: 2px solid #0d47a1;
+  box-shadow: 0 0 10px rgba(25, 118, 210, 0.5);
+}
+
+.button-group button.active:disabled {
+  opacity: 1;
+  background-color: #1976d2;
+  box-shadow: 0 0 10px rgba(25, 118, 210, 0.8);
 }

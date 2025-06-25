@@ -1,4 +1,4 @@
-<div class="container">
+   <div class="container">
   <div class="header">
     <h2>Scheduler Options</h2>
     <h2>Active Connection: {{ connection?.name }} ({{ connection?.ipAddress }})</h2>
@@ -7,12 +7,48 @@
 
   <div class="content">
     <div class="button-group">
-      <button (click)="goToScheduleReading(0)">Continuous Reading</button>
-      <button (click)="goToScheduleReading(1)">1 Second Reading</button> 
-      <button (click)="goToScheduleReading(2)">2 Second Reading</button>
-      <button (click)="goToScheduleReading(3)">3 Second Reading</button>
-      <button (click)="goToScheduleReading(4)">4 Second Reading</button>
-      <button (click)="goToScheduleReading(5)">5 Second Reading</button>   <!-- from these buttons 0 1 2 3 4 5 are the interval-->
+      <button 
+        [disabled]="activeInterval !== null && activeInterval !== 0"
+        [class.active]="activeInterval === 0"
+        (click)="goToScheduleReading(0)">
+        Continuous Reading
+      </button>
+
+      <button 
+        [disabled]="activeInterval !== null && activeInterval !== 1"
+        [class.active]="activeInterval === 1"
+        (click)="goToScheduleReading(1)">
+        1 Second Reading
+      </button>
+
+      <button 
+        [disabled]="activeInterval !== null && activeInterval !== 2"
+        [class.active]="activeInterval === 2"
+        (click)="goToScheduleReading(2)">
+        2 Second Reading
+      </button>
+
+      <button 
+        [disabled]="activeInterval !== null && activeInterval !== 3"
+        [class.active]="activeInterval === 3"
+        (click)="goToScheduleReading(3)">
+        3 Second Reading
+      </button>
+
+      <button 
+        [disabled]="activeInterval !== null && activeInterval !== 4"
+        [class.active]="activeInterval === 4"
+        (click)="goToScheduleReading(4)">
+        4 Second Reading
+      </button>
+
+      <button 
+        [disabled]="activeInterval !== null && activeInterval !== 5"
+        [class.active]="activeInterval === 5"
+        (click)="goToScheduleReading(5)">
+        5 Second Reading
+      </button>
+
       <button (click)="goToAutoWrite()">Auto Write</button>
       <button (click)="goToViewHistory()">View History</button>
     </div>
@@ -20,5 +56,6 @@
 </div>
 
 <div class="footer">
-      <p>* * * * *</p>
-    </div>
+  <p *ngIf="activeInterval !== null">Currently monitoring every {{activeInterval === 0 ? 'continuously' : activeInterval + ' seconds'}}</p>
+  <p *ngIf="activeInterval === null">* * * * *</p>
+</div>

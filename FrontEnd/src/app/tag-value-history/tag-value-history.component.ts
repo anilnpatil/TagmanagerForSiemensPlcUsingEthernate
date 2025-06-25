@@ -55,16 +55,24 @@ export class TagValueHistoryComponent implements OnInit {
     });
   }
 
-  getTagKeys(tag: TagValueResponse): string[] {
-  return tag ? Object.keys(tag.tagValues) : [];
-}
+    getTagKeys(tag: TagValueResponse): string[] {
+    return tag ? Object.keys(tag.tagValues) : [];
+  }
 
-totalPages(): number {
-  return Math.ceil(this.totalElements / this.pageSize);
-}
+  totalPages(): number {
+    return Math.ceil(this.totalElements / this.pageSize);
+  }
 
   onPageChange(newPage: number): void {
     this.currentPage = newPage;
     this.loadData();
+  }
+
+  goBack(): void {
+    this.router.navigate(['/scheduler'], {
+      state: {
+        connection: this.connection
+      }
+    });
   }
 }
