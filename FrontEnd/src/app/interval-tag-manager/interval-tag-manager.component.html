@@ -1,0 +1,63 @@
+<!-- interval-tag-manager.component.html -->
+<div class="container-wrapper">
+  <div class="header">
+    <div class="left-controls">
+      <mat-icon (click)="goToHome()" class="home-icon">home</mat-icon>
+    </div>
+    <div class="center-controls">
+      <strong>Active Connection:</strong>
+      <span *ngIf="connection">{{ connection.name }} ({{ connection.ipAddress }})</span>
+      <span *ngIf="!connection">No Connection</span>
+    </div>
+    <div class="right-controls">
+      <button class="back-button" (click)="goToScheduler()">Back</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="box">
+      <h2 class="fixed-heading">Available Tags (from global selection):</h2>
+      <div class="scrollable-content">
+        <ul>
+          <li *ngFor="let tag of availableTags"
+              (click)="selectTag(tag, $event, false)"
+              [class.selected]="selectedTags.includes(tag)">
+            {{ tag }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button mat-icon-button (click)="moveSelectedTags(true)" [class.selected]="isMoveToRightAllowed()">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+      <button mat-icon-button (click)="moveSelectedTags(false)" [class.selected]="isMoveToLeftAllowed()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+
+    <div class="box">
+      <h2 class="fixed-heading">Interval Tags ({{ interval }}s):</h2>
+      <div class="scrollable-content">
+        <ul>
+          <li *ngFor="let tag of intervalTags"
+              (click)="selectTag(tag, $event, true)"
+              [class.selected]="selectedTags.includes(tag)"
+              [class.new-tag]="isNewTag(tag)">
+            {{ tag }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-controls">
+    <button class="ok" (click)="saveSelectedTags()">OK</button>
+    <button class="cancel" (click)="clearSelectedTags()">Cancel</button>
+  </div>
+
+  <div *ngIf="message" class="message {{ messageType }}">
+    {{ message }}
+  </div>
+</div>

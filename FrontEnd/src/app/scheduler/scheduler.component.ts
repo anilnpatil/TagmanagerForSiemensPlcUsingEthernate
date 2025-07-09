@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Connection } from '../models/connection.model';
+import { HttpClient } from '@angular/common/http';
 import { TagMonitorService } from '../services/tag-monitor.service';
 import { Subscription } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-scheduler',
@@ -21,12 +21,15 @@ export class SchedulerComponent implements OnInit, OnDestroy {
     private tagMonitorService: TagMonitorService
   ) {
     const navigation = this.router.getCurrentNavigation();
-    if (navigation?.extras.state) {
-      this.connection = navigation.extras.state['connection'];
+    const stateConn = navigation?.extras?.state?.['connection'];
+
+    if (stateConn) {
+      this.connection = stateConn;
+      localStorage.setItem('selectedConnection', JSON.stringify(stateConn));
     } else {
-      const storedConnection = localStorage.getItem('selectedConnection');
-      if (storedConnection) {
-        this.connection = JSON.parse(storedConnection);
+      const storedConn = localStorage.getItem('selectedConnection');
+      if (storedConn) {
+        this.connection = JSON.parse(storedConn);
       }
     }
   }
@@ -44,28 +47,14 @@ export class SchedulerComponent implements OnInit, OnDestroy {
   goToScheduleReading(interval: number): void {
     if (!this.connection) return;
 
-    // If clicking the already active interval, just navigate to the page
-    if (this.activeInterval === interval) {
+      localStorage.setItem('selectedConnection', JSON.stringify(this.connection));
+      localStorage.setItem('selectedInterval', interval.toString());
+
       this.router.navigate(['/schedule-reading'], {
         state: {
           connection: this.connection,
           interval: interval
         }
-      });
-      return;
-    }
-
-    // If another interval is active, prevent navigation
-    if (this.activeInterval !== null && this.activeInterval !== interval) {
-      return;
-    }
-
-    // For new interval, proceed with navigation
-    this.router.navigate(['/schedule-reading'], {
-      state: {
-        connection: this.connection,
-        interval: interval
-      }
     });
   }
 
@@ -87,8 +76,18 @@ export class SchedulerComponent implements OnInit, OnDestroy {
     this.router.navigate(['/tag-manager']);
   }
 
-  stopBackground(): void {
-    this.tagMonitorService.stopMonitoring();
-    this.activeInterval = null;
+  openManageTags(interval: number): void {
+    if (!this.connection) return;
+
+    // Save to localStorage so reload works inside interval-tag-manager
+    localStorage.setItem('intervalConnection', JSON.stringify(this.connection));
+    localStorage.setItem('intervalValue', String(interval));
+
+    this.router.navigate(['/interval-tag-manager'], {
+      state: {
+        connection: this.connection,
+        interval: interval
+      }
+    });
   }
 }

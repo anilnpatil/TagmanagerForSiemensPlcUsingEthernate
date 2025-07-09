@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**","api/**","/getSavedTagsById").permitAll() //,"/getSavedTagsById","/tagValues/**","/saveSelectedTags","/user/**"
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
-                        .requestMatchers("/user/**","/getSavedTagsById","/tagValues/**","/saveSelectedTags").hasAnyAuthority
+                        .requestMatchers("/user/**","/getSavedTagsById","/tagValues/**","/saveSelectedTags","/interval-tags/**").hasAnyAuthority
                         ("USER", "ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

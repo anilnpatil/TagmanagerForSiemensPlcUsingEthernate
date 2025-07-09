@@ -1,61 +1,82 @@
-   <div class="container">
-  <div class="header">
-    <h2>Scheduler Options</h2>
-    <h2>Active Connection: {{ connection?.name }} ({{ connection?.ipAddress }})</h2>
-    <button class="back-button" (click)="goBack()">Back</button>
+<!-- scheduler.component.html -->
+<div class="container">
+  <!-- Header Section -->
+    <div class="header">
+      <div class="left-controls">
+        <h2>Scheduler Options</h2>
+      </div>
+      <div class="center-controls">
+        <strong>Active Connection:</strong> 
+        <span *ngIf="connection">{{ connection.name }} ({{ connection.ipAddress }})</span>
+        <span *ngIf="!connection">No Connection</span>
+      </div>
+      <div class="right-controls">
+        <button class="back-button" (click)="goBack()">Back</button>
+      </div>
+    </div>
+ 
+  <div class="content two-column">
+    <div class="column">
+      <div
+        class="interval-block"
+        *ngFor="let interval of [0,1,2]"
+        [class.active-reading]="activeInterval === interval"
+      >
+        <h3>{{ interval === 0 ? 'Continuous Reading' : interval + ' Second Reading' }}</h3>
+        <div class="button-group">
+          <button
+            [disabled]="activeInterval === interval"
+            (click)="openManageTags(interval)"
+          >
+            Manage Tags
+          </button>
+          <button
+            class="proceed-button"
+            [disabled]="activeInterval !== null && activeInterval !== interval"
+            (click)="goToScheduleReading(interval)"
+          >
+            Proceed
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div
+        class="interval-block"
+        *ngFor="let interval of [3,4,5]"
+        [class.active-reading]="activeInterval === interval"
+      >
+        <h3>{{ interval + ' Second Reading' }}</h3>
+        <div class="button-group">
+          <button
+            [disabled]="activeInterval === interval"
+            (click)="openManageTags(interval)"
+          >
+            Manage Tags
+          </button>
+          <button
+            class="proceed-button"
+            [disabled]="activeInterval !== null && activeInterval !== interval"
+            (click)="goToScheduleReading(interval)"
+          >
+            Proceed
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="content">
-    <div class="button-group">
-      <button 
-        [disabled]="activeInterval !== null && activeInterval !== 0"
-        [class.active]="activeInterval === 0"
-        (click)="goToScheduleReading(0)">
-        Continuous Reading
-      </button>
-
-      <button 
-        [disabled]="activeInterval !== null && activeInterval !== 1"
-        [class.active]="activeInterval === 1"
-        (click)="goToScheduleReading(1)">
-        1 Second Reading
-      </button>
-
-      <button 
-        [disabled]="activeInterval !== null && activeInterval !== 2"
-        [class.active]="activeInterval === 2"
-        (click)="goToScheduleReading(2)">
-        2 Second Reading
-      </button>
-
-      <button 
-        [disabled]="activeInterval !== null && activeInterval !== 3"
-        [class.active]="activeInterval === 3"
-        (click)="goToScheduleReading(3)">
-        3 Second Reading
-      </button>
-
-      <button 
-        [disabled]="activeInterval !== null && activeInterval !== 4"
-        [class.active]="activeInterval === 4"
-        (click)="goToScheduleReading(4)">
-        4 Second Reading
-      </button>
-
-      <button 
-        [disabled]="activeInterval !== null && activeInterval !== 5"
-        [class.active]="activeInterval === 5"
-        (click)="goToScheduleReading(5)">
-        5 Second Reading
-      </button>
-
-      <button (click)="goToAutoWrite()">Auto Write</button>
-      <button (click)="goToViewHistory()">View History</button>
-    </div>
+  <div class="button-group center">
+    <button class="auto-write-button" (click)="goToAutoWrite()">Auto Write</button>
+    <button class="view-history-button" (click)="goToViewHistory()">View History</button>
   </div>
 </div>
 
 <div class="footer">
-  <p *ngIf="activeInterval !== null">Currently monitoring every {{activeInterval === 0 ? 'continuously' : activeInterval + ' seconds'}}</p>
+  <p *ngIf="activeInterval !== null">
+    Currently monitoring every
+    {{ activeInterval === 0 ? 'continuously' : activeInterval + ' seconds' }}
+  </p>
   <p *ngIf="activeInterval === null">* * * * *</p>
 </div>

@@ -37,18 +37,33 @@ export class ScheduleReadingComponent implements OnInit, OnDestroy {
   }
 
   private initializeComponent(): void {
-    const state = history.state;
-    this.connection = state['connection'];
-    this.interval = state['interval'] ?? 0;
+  const state = history.state;
+  this.connection = state['connection'];
+  this.interval = state['interval'];
 
-    if (!this.connection) {
-      this.router.navigate(['/']);
-      return;
+  // Fallback to localStorage if values are missing
+  if (!this.connection) {
+    const connStr = localStorage.getItem('selectedConnection');
+    if (connStr) {
+      this.connection = JSON.parse(connStr);
     }
-
-    this.resetComponentState();
-    this.initializeMonitoring();
   }
+
+  if (!this.interval && this.interval !== 0) {
+    const intervalStr = localStorage.getItem('selectedInterval');
+    if (intervalStr) {
+      this.interval = parseInt(intervalStr, 10);
+    }
+  }
+
+  if (!this.connection) {
+    this.router.navigate(['/']); // Still fallback if all else fails
+    return;
+  }
+
+  this.resetComponentState();
+  this.initializeMonitoring();
+}
 
   private resetComponentState(): void {
     this.errorMessage = null;
@@ -120,7 +135,7 @@ export class ScheduleReadingComponent implements OnInit, OnDestroy {
     this.errorMessage = null;
 
     this.http.get<string[]>(
-      `http://localhost:8081/getSavedTagsById?connectionId=${this.connection!.id}`
+      `http://localhost:8081/interval-tags/get?connectionId=${this.connection!.id}&interval=${this.interval}`
     ).subscribe({
       next: (tags) => this.handleTagsResponse(tags),
       error: (err) => this.handleTagsError(err)

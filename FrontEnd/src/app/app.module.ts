@@ -37,6 +37,7 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { TagValueHistoryComponent } from './tag-value-history/tag-value-history.component';
+import { IntervalTagManagerComponent } from './interval-tag-manager/interval-tag-manager.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { TagValueHistoryComponent } from './tag-value-history/tag-value-history.
     DashboardComponent,
     HomeComponent,
     UserManagementComponent,
-    TagValueHistoryComponent
+    TagValueHistoryComponent,
+    IntervalTagManagerComponent
   ],
   imports: [
     BrowserModule,

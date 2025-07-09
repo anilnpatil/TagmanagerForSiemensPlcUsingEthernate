@@ -1,5 +1,8 @@
+/* interval-tag-manager.component.scss */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 body {
-  background-color: #f0f8ff; /* Very light sky blue */
+  background-color: #f0f8ff;
   margin: 0;
   font-family: Arial, sans-serif;
 }
@@ -7,8 +10,8 @@ body {
 .container-wrapper {
   display: flex;
   flex-direction: column;
-  height: calc(105vh - 60px); /* Adjust height to make room for bottom buttons */
-  overflow: hidden; /* Prevent common scrollbar */
+  height: calc(100vh - 60px);
+  overflow: hidden;
 }
 
 .header {
@@ -16,10 +19,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #9af7cd; /* Blue background color */
+  background-color: #9af7cd;
   color: #007bff;
-  width: 100%; /* Full-width header */
-  padding: 15px 20px; /* Padding for content spacing */
+  width: 100%;
+  padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   position: fixed;
   top: 0;
@@ -30,68 +33,39 @@ body {
 .home-icon {
   cursor: pointer;
   font-size: 30px;
-  color: #007bff; /* Icon color */
+  color: #007bff;
   transition: transform 0.3s, color 0.3s;
 
   &:hover {
-    color: #1976d2; /* Change color on hover */
-    transform: scale(1.1); /* Slightly enlarge icon */
+    color: #1976d2;
+    transform: scale(1.1);
   }
 }
 
-.title {
-  font-size: 24px;
-  text-align: center;
-  flex-grow: 1; /* Center title in the header */
-}
+.back-button {
+    background-color: #d3af2f;;
+    color: white;
+    border: none;
+    padding: 0.7rem 2rem;
+    border-radius: 7px;
+    font-size: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-right: 30px;
 
-.top-controls {
-  display: flex;
-  gap: 10px;
-}
-
-button.scheduler,
-button.read-tags,
-button.write-tags {
-  padding: 8px 16px;
-  font-size: 16px;
-  cursor: pointer; /* Adds pointer cursor on hover */
-  background-color: #0073ff; /* blue background */
-  color:#ffffff; /* Blue text */
-  border: none;
-  border-radius: 4px;
-  margin-right: 30px;
-  transition: background-color 0.3s ease; /* Smooth hover transition */
-}
-
-button.read-tags:hover {
-  background-color: #3819d2; /* Light blue on hover */
-}
-button.write-tags:hover {
-  background-color: #3819d2; /* Light blue on hover */
-}
-button.scheduler:hover {
-  background-color: #3819d2; /* Light blue on hover */
-}
-
-.connection-detail {
-  background-color: #d4edda;
-  color: #155724;
-  padding: 10px;
-  border: 1px solid #c3e6cb;
-  border-radius: 5px;
-  text-align: center;
-  margin-top: 70px; /* Spacing below the fixed header */
-  box-shadow: 3px 3px 5px #999;
-}
+    &:hover {
+      background-color: #f4be36;
+      color:brown
+    }
+  }
 
 .container {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   height: 100%;
-  margin-top: 50px;
-  overflow: hidden; /* Prevent common scrollbar */
+  margin-top: 80px;
+  overflow: hidden;
 }
 
 .box {
@@ -102,9 +76,6 @@ button.scheduler:hover {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  margin-top:15px; 
-  margin-bottom: 10px;
- 
 }
 
 .fixed-heading {
@@ -125,7 +96,7 @@ button.scheduler:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80%; /* Align center vertically */
+  height: 80%;
 }
 
 .controls button {
@@ -139,7 +110,7 @@ button.scheduler:hover {
 
 .controls button:active {
   box-shadow: inset 3px 3px 5px #999;
-  transform: translateY(2px);  
+  transform: translateY(2px);
 }
 
 .controls button.selected {
@@ -194,27 +165,27 @@ li.new-tag {
 }
 
 .bottom-controls button.ok {
-  background-color: #999; /* Default color */
+  background-color: #999;
   cursor: not-allowed;
   pointer-events:none;
   opacity: 0.8;
 }
 
 .bottom-controls button.cancel {
-  background-color:#999; /* Default color */
+  background-color:#999;
   cursor: not-allowed;
   pointer-events: none;
   opacity: 0.8;
 }
 
 .bottom-controls button.ok.glow-green {
-  background-color: #00ff00; /* Green color */
+  background-color: #00ff00;
   cursor: pointer;
   pointer-events:all;
 }
 
 .bottom-controls button.cancel.glow-yellow {
-  background-color: #ffcc00; /* Yellow color */
+  background-color: #ffcc00;
   cursor: pointer;
   pointer-events:all;
 }
@@ -247,10 +218,7 @@ li.new-tag {
 }
 
 @keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
+
