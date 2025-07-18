@@ -19,7 +19,7 @@ public class IntervalTag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int interval; // e.g., 1, 2, 3...
+    private Float interval; // e.g., 1, 2, 3...
 
     private String tag;
 
@@ -28,7 +28,7 @@ public class IntervalTag {
     private Connection connection;
 
      // ADD THIS CONSTRUCTOR IF USING LOMBOK DOESN'T COVER IT
-    public IntervalTag(Long id, String tag, int interval, Connection connection) {
+    public IntervalTag(Long id, String tag, Float interval, Connection connection) {
         this.id = id;
         this.tag = tag;
         this.interval = interval;

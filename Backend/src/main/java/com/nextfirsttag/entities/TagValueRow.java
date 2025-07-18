@@ -18,6 +18,23 @@ public class TagValueRow {
     private LocalDateTime timestamp;
 
     // Fixed tag fields
+    private int DB20_DBD0;
+    private int DB20_DBD4;
+    private int DB20_DBD8;
+    private int DB20_DBD12;
+    private int DB20_DBD16;
+    private int DB20_DBD20;
+    private int DB20_DBD24;
+    private int DB20_DBD28;
+    private int DB20_DBD32;
+    private int DB20_DBD36;
+    private int DB20_DBD40;
+    private int DB20_DBD44;
+    private int DB20_DBD48;
+    private int DB20_DBD52;
+    private int DB20_DBD64;
+    private int DB20_DBD68;
+    private int DB20_DBD72;
     private Double DB4_DBD0;
     private Double DB4_DBD4;
     private Double DB4_DBD8;
@@ -62,9 +79,8 @@ public class TagValueRow {
     private String DB6_DBX256;
     private String DB6_DBX512;
     private String DB6_DBX768;
-
-
-
+    
+   
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "connection_id")
     private Connection connection;

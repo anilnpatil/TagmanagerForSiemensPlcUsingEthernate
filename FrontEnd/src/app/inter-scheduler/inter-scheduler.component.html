@@ -1,0 +1,118 @@
+<!-- inter-scheduler.component.html
+<div class="container">
+  <!- Header ->
+  <div class="header">
+    <div class="left-controls">
+      <h2>Interleaved Scheduler Options</h2>
+    </div>
+    <div class="center-controls">
+      <strong>Active Connection:</strong>
+      <span *ngIf="connection">{{ connection.name }} ({{ connection.ipAddress }})</span>
+      <span *ngIf="!connection">No Connection</span>
+    </div>
+    <div class="right-controls">
+      <button class="scheduleBuilder-button" (click)="goToScheduleBuilder()">ScheduleBuilder</button>
+    </div>
+    <div class="right-controls">
+      <button class="back-button" (click)="goBack()">Back</button>
+    </div>
+  </div>
+
+  <!- Interval Cards (3 columns x 2 rows = 6 cards) ->
+  <div class="grid-layout">
+    <div class="interval-block" *ngFor="let interval of dynamicIntervals.slice(0, 6); let i = index" 
+         [class.active-reading]="activeInterval === getCurrentIntervalValue(interval)">
+      <div class="interval-header">
+        <h3>{{ i + 1 }} Reading</h3>
+        <select [(ngModel)]="interval.value" (change)="onIntervalChange()">
+          <option *ngFor="let preset of presetIntervals" [value]="preset">{{ preset + ' sec' }}</option>
+          <option value="custom">Custom...</option>
+        </select>
+        <input *ngIf="interval.value === 'custom'" type="number" min="0.1" step="0.1"
+               [(ngModel)]="interval.customValue" placeholder="Seconds" (change)="onIntervalChange()" />
+      </div>
+
+      <div class="button-group">
+        <button class="manage-button"
+                [disabled]="activeInterval === getCurrentIntervalValue(interval)"
+                (click)="openManageTags(getCurrentIntervalValue(interval))">
+          Manage Tags 
+        </button>
+        <button class="proceed-button"
+                [class.active-button]="activeInterval === getCurrentIntervalValue(interval)"
+                [disabled]="(activeInterval !== null && activeInterval !== getCurrentIntervalValue(interval)) || !isValidInterval(getCurrentIntervalValue(interval))"
+                (click)="goToScheduleReading(getCurrentIntervalValue(interval))">
+          Proceed to Read
+        </button>
+      </div>
+    </div>
+  </div>
+
+   <!- Bottom Buttons ->
+  <div class="button-group center">
+    <button class="auto-write-button" (click)="goToAutoWrite()">Auto Write</button>
+    <button class="view-history-button" (click)="goToViewHistory()">View History</button>
+  </div>
+
+  <!- Footer ->
+  <div class="footer">
+    <p *ngIf="activeInterval !== null">
+      Currently monitoring every {{ activeInterval }} seconds
+    </p>
+    <p *ngIf="activeInterval === null">* * * * *</p>
+  </div>
+</div>  -->
+
+<div class="container">
+  <div class="header">
+    <div class="left-controls">
+      <button class="scheduleBuilder-button" (click)="goToScheduleBuilder()">Schedule Builder</button>
+    </div>
+    <div class="center-controls">
+      <strong>Active Connection:</strong>
+      <span *ngIf="connection">{{ connection.name }} ({{ connection.ipAddress }})</span>
+      <span *ngIf="!connection">No Connection</span>
+    </div>
+    <div class="right-controls">
+      <button class="back-button" (click)="goBack()">Back</button>
+    </div>
+  </div>
+
+  <div class="grid-layout">
+    <div class="interval-block" *ngFor="let interval of dynamicIntervals.slice(0, 6); let i = index" 
+         [class.active-reading]="activeInterval === getCurrentIntervalValue(interval)">
+      <div class="interval-header">
+        <h3>{{ i + 1 }} Tag Selection Point</h3>
+        <select [(ngModel)]="interval.value" (change)="onIntervalChange()">
+          <option *ngFor="let preset of presetIntervals" [value]="preset">{{ preset + ' sec' }}</option>
+          <option value="custom">Custom...</option>
+        </select>
+        <input *ngIf="interval.value === 'custom'" type="number" min="0.1" step="0.1"
+               [(ngModel)]="interval.customValue" placeholder="Seconds" (change)="onIntervalChange()" />
+      </div>
+
+      <div class="button-group">
+        <button class="manage-button"
+                [disabled]="activeInterval === getCurrentIntervalValue(interval)"
+                (click)="openManageTags(getCurrentIntervalValue(interval))">
+          Manage Tags 
+        </button>
+        <button class="proceed-button"
+                [class.active-button]="activeInterval === getCurrentIntervalValue(interval)"
+                [disabled]="(activeInterval !== null && activeInterval !== getCurrentIntervalValue(interval)) || !isValidInterval(getCurrentIntervalValue(interval))"
+                (click)="goToScheduleReading(getCurrentIntervalValue(interval))">
+          Proceed to Read
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-group center">
+    <button class="auto-write-button" (click)="goToAutoWrite()">Auto Write</button>
+    <button class="view-history-button" (click)="goToViewHistory()">View History</button>
+  </div>
+
+  <div class="footer">
+    Designed for multi-interval PLC scheduling with tag management
+  </div>
+</div>

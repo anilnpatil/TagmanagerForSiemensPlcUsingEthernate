@@ -50,6 +50,7 @@ body {
   gap: 10px;
 }
 
+button.inter-scheduler,
 button.scheduler,
 button.read-tags,
 button.write-tags {
@@ -71,6 +72,9 @@ button.write-tags:hover {
   background-color: #3819d2; /* Light blue on hover */
 }
 button.scheduler:hover {
+  background-color: #3819d2; /* Light blue on hover */
+}
+button.inter-scheduler:hover{
   background-color: #3819d2; /* Light blue on hover */
 }
 

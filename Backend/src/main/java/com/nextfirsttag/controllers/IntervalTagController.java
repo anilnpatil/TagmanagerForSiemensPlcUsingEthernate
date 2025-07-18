@@ -1,5 +1,6 @@
 package com.nextfirsttag.controllers;
 
+import com.nextfirsttag.dto.IntervalTagGroupDTO;
 import com.nextfirsttag.dto.IntervalTagRequest;
 import com.nextfirsttag.services.IntervalTagService;
 
@@ -41,17 +42,30 @@ public ResponseEntity<Map<String, String>> saveTagsForInterval(@RequestBody Inte
     @CrossOrigin("*")
     public ResponseEntity<List<String>> getTagsForInterval(
             @RequestParam Long connectionId,
-            @RequestParam int interval) {
+            @RequestParam Float interval) {
 
         List<String> tags = intervalTagService.getTagsForInterval(connectionId, interval);
         return ResponseEntity.ok(tags);
     }
+        
+    @GetMapping("/grouped")
+    @CrossOrigin("*")
+    public ResponseEntity<List<IntervalTagGroupDTO>> getGroupedTagsByConnection(
+            @RequestParam Long connectionId) {
+        try {
+            List<IntervalTagGroupDTO> groups = intervalTagService.getGroupedTagsByConnection(connectionId);
+            return ResponseEntity.ok(groups);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(List.of()); // Or return a proper error structure
+        }
+    }    
     
     // ✅ Delete specific tags for connection and interval (with request body)
     @DeleteMapping("/delete-specific")
     @CrossOrigin("*")
     public ResponseEntity<Map<String, String>> deleteSpecificTagsForInterval(@RequestParam Long connectionId,
-            @RequestParam int interval,
+            @RequestParam Float interval,
             @RequestBody Map<String, List<String>> request) {
         List<String> tags = request.get("tags");
         try {
@@ -80,7 +94,7 @@ public ResponseEntity<Map<String, String>> saveTagsForInterval(@RequestBody Inte
     @CrossOrigin("*")
     public ResponseEntity<String> deleteAllTagsForInterval(
             @RequestParam Long connectionId,
-            @RequestParam int interval) {
+            @RequestParam Float interval) {
 
         intervalTagService.deleteAllTagsForInterval(connectionId, interval);
         return ResponseEntity.ok("All tags deleted for interval " + interval + "s.");

@@ -11,6 +11,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { TagValueSaveRequest, ApiResponse } from '../models/tag-payload.model';
 import { Observable } from 'rxjs';
 
 export interface TagValueResponse {
@@ -43,4 +44,10 @@ export class TagValueService {
 
     return this.http.get<PaginatedResponse<TagValueResponse>>(`${this.baseUrl}/tagValues/byConnection`, { params });
   }
+
+  saveTagValues(payload: TagValueSaveRequest): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>('http://localhost:8081/tagValues/saveBatch', payload);
+  }
+
+
 }

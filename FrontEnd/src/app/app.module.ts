@@ -38,6 +38,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { TagValueHistoryComponent } from './tag-value-history/tag-value-history.component';
 import { IntervalTagManagerComponent } from './interval-tag-manager/interval-tag-manager.component';
+import { InterSchedulerComponent } from './inter-scheduler/inter-scheduler.component';
+import { ScheduleBuilderComponent } from './schedule-builder/schedule-builder.component';
+import { ReactiveFormsModule } from '@angular/forms';  
 
 @NgModule({
   declarations: [
@@ -58,11 +61,14 @@ import { IntervalTagManagerComponent } from './interval-tag-manager/interval-tag
     HomeComponent,
     UserManagementComponent,
     TagValueHistoryComponent,
-    IntervalTagManagerComponent
+    IntervalTagManagerComponent,
+    InterSchedulerComponent,
+    ScheduleBuilderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule, 
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,

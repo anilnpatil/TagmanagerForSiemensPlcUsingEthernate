@@ -6,6 +6,6 @@ import java.util.List;
 @Data
 public class IntervalTagRequest {
     private Long connectionId;
-    private int interval;
+    private Float interval;
     private List<String> tags;
 }

@@ -21,7 +21,8 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { RoleGuard } from './guards/role.guard';
 import { TagValueHistoryComponent } from './tag-value-history/tag-value-history.component';
 import { IntervalTagManagerComponent } from './interval-tag-manager/interval-tag-manager.component';
-
+import { InterSchedulerComponent } from './inter-scheduler/inter-scheduler.component';
+import { ScheduleBuilderComponent } from './schedule-builder/schedule-builder.component';
 // const routes: Routes = [
 //   { path: '', component: HomeComponent },
 //   { path: 'home1', component: Home1Component, canActivate: [AuthGuard] }, // 👈 Protected
@@ -51,21 +52,21 @@ const routes: Routes = [
   { path: 'add-connection', component: AddConnectionComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['ADMIN'] } },
   { path: 'delete-connection', component: DeleteConnectionComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['ADMIN'] } },
   { path: 'user-management', component: UserManagementComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['ADMIN'] } },
-
   // USER or ADMIN access
   { path: 'select-connection', component: SelectConnectionComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
   { path: 'tag-manager', component: TagManagerComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
   { path: 'read-tags', component: ReadTagsComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
   { path: 'write-tags', component: WriteTagsComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
   { path: 'scheduler', component: SchedulerComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
+  { path: 'inter-scheduler', component: InterSchedulerComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
   { path: 'schedule-reading', component: ScheduleReadingComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
   { path: 'auto-write-tags', component: AutoWriteTagsComponent, canActivate: [AuthGuard, RoleGuard], data: { expectedRoles: ['USER', 'ADMIN'] } },
-
   // Public
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard, RoleGuard], data:{expectedRoles: ['ADMIN']} },
   { path: 'tag-value-history', component: TagValueHistoryComponent, canActivate: [AuthGuard, RoleGuard], data:{expectedRoles: ['USER', 'ADMIN']} },
   { path: 'interval-tag-manager', component:IntervalTagManagerComponent, canActivate: [AuthGuard, RoleGuard], data:{expectedRoles: ['USER', 'ADMIN']}},
+  { path: 'schedule-builder', component: ScheduleBuilderComponent, canActivate: [AuthGuard, RoleGuard], data:{expectedRoles: ['USER', 'ADMIN']}},
   // Unauthorized fallback
   { path: 'unauthorized', component: HomeComponent },
 ];

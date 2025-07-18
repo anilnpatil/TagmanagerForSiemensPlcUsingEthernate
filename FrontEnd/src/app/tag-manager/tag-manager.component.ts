@@ -47,15 +47,25 @@ export class TagManagerComponent implements OnInit {
       }
     });
   }
+// modified/improved interscheduler component added if want old one only we can swith to this 
+  // navigateToScheduler() {
+  //   this.router.navigate(['/scheduler'], {
+  //     state: {
+  //       selectedTags: this.selectedTags,
+  //       connection: this.connection
+  //     }
+  //   });
+  // }
 
-  navigateToScheduler() {
-  this.router.navigate(['/scheduler'], {
-    state: {
-      selectedTags: this.selectedTags,
-      connection: this.connection
-    }
-  });
-}
+  navigateToInterScheduler() {
+    this.router.navigate(['/inter-scheduler'], {
+      state: {
+        selectedTags: this.selectedTags,
+        connection: this.connection
+      }
+    });
+  }
+
 
   navigateToReadTags(): void {
     if (this.connection) {

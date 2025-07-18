@@ -186,7 +186,7 @@ export class ScheduleReadingComponent implements OnInit, OnDestroy {
   }
 
   private navigateToScheduler(): void {
-    this.router.navigate(['/scheduler'], {
+    this.router.navigate(['/inter-scheduler'], {
       state: { connection: this.connection }
     });
   }

@@ -1,0 +1,116 @@
+<!-- 
+<div class="schedule-page">
+  <header>
+    <h1>PLC Scheduler Dashboard</h1>
+    <button class="back-button" (click)="goBack()">← Back</button>
+  </header>
+
+  <div class="control-bar">
+    <span><strong>Connection:</strong> {{ connectionId }}</span>
+
+    <label>
+      <strong>Call Frequency (Hz):</strong>
+      <input type="number" [formControl]="callFrequencyHzControl" min="1" max="20" />
+    </label>
+
+    <span><strong>Effective Interval:</strong> {{ 1000 / (callFrequencyHzControl.value || 2) }} ms</span>
+
+    <button (click)="fetchAndPrepareSchedule()">Restart Scheduler</button>
+    <button (click)="ngOnDestroy()">Stop Scheduler</button>
+    <button (click)="toggleIntervalGroup()">{{ getIntervalGroupButtonLabel() }}</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-box">
+    ⚠️ {{ errorMessage }}
+  </div>
+
+  <div *ngIf="showIntervalGroup" class="entries-section">
+    <h3>Loaded Interval Groups</h3>
+    <ul>
+      <li *ngFor="let group of intervalTagGroups">
+        <strong>Interval:</strong> {{ group.interval }}s → <strong>Tags:</strong> {{ group.tags.join(', ') }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="data-table" *ngIf="latestData.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let col of getTagHeaders()">{{ col }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of latestData">
+          <td *ngFor="let col of getTagHeaders()">
+            {{ row[col] !== null ? row[col] : 'N/A' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>&copy; {{ currentYear }} PLC Scheduler System</p>
+  </footer>
+</div>
+
+ -->
+<!-- schedule-builder.component.html -->
+<div class="schedule-page">
+  <header>
+    <h1>PLC Scheduler Dashboard</h1>
+    <button class="back-button" (click)="goBack()">← Back</button>
+  </header>
+
+  <div class="control-bar">
+    <span><strong>Connection:</strong> {{ connectionId }}</span>
+
+    <label>
+      <strong>Call Frequency (Hz):</strong>
+      <input type="number" [formControl]="callFrequencyHzControl" min="1" max="20" />
+    </label>
+
+    <span><strong>Effective Interval:</strong> {{ 1000 / (callFrequencyHzControl.value || 2) }} ms</span>
+
+    <button (click)="fetchAndPrepareSchedule()">Restart Scheduler</button>
+    <button (click)="ngOnDestroy()">Stop Scheduler</button>
+    <button (click)="toggleIntervalGroup()">{{ getIntervalGroupButtonLabel() }}</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-box">
+    ⚠️ {{ errorMessage }}
+  </div>
+
+  <div *ngIf="showIntervalGroup" class="entries-section">
+    <h3>Loaded Interval Groups</h3>
+    <ul>
+      <li *ngFor="let group of intervalTagGroups">
+        <strong>Interval:</strong> {{ group.interval }}s → <strong>Tags:</strong> {{ group.tags.join(', ') }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="data-table-wrapper" #dataTableWrapper>
+    <div class="data-table" *ngIf="latestData.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let col of getTagHeaders()">{{ col }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of latestData">
+            <td *ngFor="let col of getTagHeaders()">
+              {{ row[col] !== null ? row[col] : 'N/A' }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; {{ currentYear }} PLC Scheduler System</p>
+  </footer>
+</div>

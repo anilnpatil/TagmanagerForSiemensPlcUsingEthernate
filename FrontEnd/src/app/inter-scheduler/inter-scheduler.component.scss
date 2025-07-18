@@ -1,0 +1,526 @@
+// /* inter-scheduler.component.scss */
+// .container {
+//   padding: 100px;
+//   font-family: 'Segoe UI', sans-serif;
+//   background-color: #f9fafc;
+//   min-height: 100vh;
+//   box-sizing: border-box;
+//   position: relative;
+// }
+
+// .header {
+//   font-size: 20px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   background-color: #9af7cd;
+//   color: #007bff;
+//   width: 100%;
+//   padding: 15px 20px;
+//   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   z-index: 1000;
+//   box-sizing: border-box;
+// }
+
+// .scheduleBuilder-button {
+//   background-color: #0073ff;
+//   color: white;
+//   border: none;
+//   padding: 0.7rem 2rem;
+//   border-radius: 7px;
+//   font-size: 16px;
+//   cursor: pointer;
+//   flex-shrink: 0;
+//   transition: background-color 0.2s;
+// }
+// .scheduleBuilder-button:hover {
+//   background-color: #3819d2;
+//   color: white;
+// }
+
+// .back-button {
+//   background-color: #d3af2f;
+//   color: white;
+//   border: none;
+//   padding: 0.7rem 2rem;
+//   border-radius: 7px;
+//   font-size: 16px;
+//   cursor: pointer;
+//   flex-shrink: 0;
+//   margin-left: 15px;
+//   transition: background-color 0.2s;
+// }
+// .back-button:hover {
+//   background-color: #f4be36;
+//   color: brown;
+// }
+
+// .grid-layout {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   grid-template-rows: repeat(2, auto);
+//   gap: 20px;
+//   padding: 30px;
+//   margin-top: 120px;
+//   justify-items: center;
+// }
+
+// .interval-block {
+//   width: 100%;
+//   max-width: 300px;
+//   padding: 25px;
+//   background-color: rgb(156, 185, 248);
+//   border-radius: 8px;
+//   border: 1px solid #dee2e6;
+//   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+//   transition: all 0.3s ease;
+// }
+
+// .interval-header {
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
+//   flex-wrap: wrap;
+//   margin-bottom: 12px;
+// }
+
+// .interval-header select,
+// .interval-header input {
+//   padding: 6px 8px;
+//   border-radius: 4px;
+//   font-size: 13px;
+//   border: 1px solid #ccc;
+//   max-width: 120px;
+// }
+// .interval-header input[type="number"] {
+//   width: 80px;
+// }
+
+// .interval-header select:focus,
+// .interval-header input:focus {
+//   outline: none;
+//   border-color: #0d6efd;
+//   box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+// }
+
+// .interval-header h3 {
+//   margin: 0;
+//   font-size: 1rem;
+//   color: #2c3e50;
+// }
+
+// .button-group {
+//   display: flex;
+//   gap: 10px;
+//   margin-top: 10px;
+//   flex-wrap: wrap;
+// }
+
+// .button-group button {
+//   padding: 6px 10px;
+//   font-size: 0.8rem;
+//   border: none;
+//   border-radius: 5px;
+//   cursor: pointer;
+//   font-weight: 500;
+//   transition: all 0.2s ease;
+//   flex: 1;
+//   min-width: 90px;
+//   max-width: 100px;
+//   box-sizing: border-box;
+// }
+
+// .manage-button {
+//   background-color: #17a2b8;
+//   color: white;
+// }
+// .manage-button:hover {
+//   background-color: #138496;
+//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+// }
+
+// .proceed-button {
+//   background-color: #28a745;
+//   color: white;
+// }
+// .proceed-button:hover {
+//   background-color: #218838;
+//   box-shadow: 0 2px 6px rgba(40, 167, 69, 0.4);
+// }
+
+// .proceed-button.active-button {
+//   background-color: #28a745 !important;
+//   box-shadow: 0 0 10px 2px #28a745;
+//   color: white;
+//   font-weight: bold;
+// }
+
+// .proceed-button[disabled] {
+//   opacity: 0.6;
+//   cursor: not-allowed;
+// }
+
+// .auto-write-button,
+// .view-history-button {
+//   padding: 30px 30px;
+//   font-size: 0.9rem;
+//   border: none;
+//   border-radius: 5px;
+//   cursor: pointer;
+//   transition: all 0.2s ease;
+//   margin: 30px;
+//   margin-top: 40px;
+//   box-sizing: border-box;
+//   min-width: 150px;
+// }
+
+// .auto-write-button {
+//   background-color: #315cde;
+//   color: white;
+// }
+// .auto-write-button:hover {
+//   background-color: #3c1dad;
+// }
+
+// .view-history-button {
+//   background-color: #ffc107;
+//   color: #212529;
+// }
+// .view-history-button:hover {
+//   background-color: #e0a800;
+// }
+
+// .button-group.center {
+//   margin: 20px auto;
+//   justify-content: center;
+//   max-width: 100%;
+// }
+
+// .footer {
+//   position: fixed;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   text-align: center;
+//   padding: 15px;
+//   font-size: 0.95rem;
+//   color: #007bff;
+//   background-color: #9af7cd;
+//   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+//   z-index: 1000;
+//   box-sizing: border-box;
+// }
+
+// .interval-block.active-reading {
+//   border: 2px solid #0d6efd;
+//   background-color: rgb(86, 241, 189);
+//   box-shadow: 0 0 15px 5px rgba(125, 221, 122, 0.6);
+//   animation: glow 1.5s ease-in-out infinite;
+// }
+
+// .interval-block.active-reading h3 {
+//   color: #0056b3;
+// }
+
+// @keyframes glow {
+//   0% {
+//     box-shadow: 0 0 10px 2px rgba(125, 221, 122, 0.4);
+//   }
+//   50% {
+//     box-shadow: 0 0 20px 8px rgba(125, 221, 122, 0.8);
+//   }
+//   100% {
+//     box-shadow: 0 0 10px 2px rgba(125, 221, 122, 0.4);
+//   }
+// }
+
+// @media (max-width: 768px) {
+//   .grid-layout {
+//     grid-template-columns: repeat(1, 1fr);
+//     margin-top: 70px;
+//   }
+
+//   .interval-header {
+//     flex-direction: column;
+//     align-items: flex-start;
+//   }
+
+//   .interval-header select,
+//   .interval-header input {
+//     max-width: 100%;
+//   }
+
+//   .button-group {
+//     flex-direction: column;
+//   }
+
+//   .button-group button {
+//     width: 100%;
+//   }
+
+//   .button-group.center {
+//     flex-direction: row;
+//     flex-wrap: wrap;
+//   }
+
+//   .footer {
+//     padding: 10px;
+//     font-size: 0.85rem;
+//   }
+// }
+
+// @media (max-width: 480px) {
+//   .header {
+//     flex-direction: column;
+//     padding: 10px;
+//   }
+
+//   .left-controls,
+//   .center-controls,
+//   .right-controls {
+//     width: 100%;
+//     margin: 5px 0;
+//     text-align: center;
+//   }
+
+//   .back-button {
+//     margin: 5px 0;
+//     width: 100%;
+//   }
+
+//   .button-group.center {
+//     flex-direction: column;
+//   }
+
+//   .button-group.center button {
+//     margin: 5px 0;
+//     width: 100%;
+//   }
+// }
+
+
+.container {
+  padding: 30px;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9fafc;
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.header {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #9af7cd;
+  color: #007bff;
+  width: 100%;
+  padding: 15px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.scheduleBuilder-button,
+.back-button {
+  background-color: #0073ff;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 7px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.2s;
+}
+.scheduleBuilder-button:hover {
+  background-color: #3819d2;
+}
+.back-button {
+  background-color: #d3af2f;
+}
+.back-button:hover {
+  background-color: #f4be36;
+  color: brown;
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // 3 columns
+  grid-template-rows: repeat(2, auto);  // 2 rows
+  gap: 20px;
+  padding: 30px;
+  margin-top: 120px;
+}
+
+.interval-block {
+  padding: 25px;
+  background-color: rgb(156, 185, 248);
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.interval-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.interval-header select,
+.interval-header input {
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  max-width: 120px;
+}
+
+.interval-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.button-group button {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  flex: 1;
+  min-width: 90px;
+  max-width: 100px;
+}
+
+.manage-button {
+  background-color: #17a2b8;
+  color: white;
+}
+.manage-button:hover {
+  background-color: #138496;
+}
+
+.proceed-button {
+  background-color: #28a745;
+  color: white;
+}
+.proceed-button:hover {
+  background-color: #218838;
+}
+.proceed-button.active-button {
+  background-color: #28a745 !important;
+  box-shadow: 0 0 10px 2px #28a745;
+  color: white;
+  font-weight: bold;
+}
+.proceed-button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.interval-block.active-reading {
+  border: 2px solid #0d6efd;
+  background-color: rgb(86, 241, 189);
+  box-shadow: 0 0 15px 5px rgba(125, 221, 122, 0.6);
+  animation: glow 1.5s ease-in-out infinite;
+}
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px 2px rgba(125, 221, 122, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 8px rgba(125, 221, 122, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px 2px rgba(125, 221, 122, 0.4);
+  }
+}
+
+.auto-write-button,
+.view-history-button {
+  padding: 15px 30px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 10px;
+  box-sizing: border-box;
+  min-width: 150px;
+}
+
+.auto-write-button {
+  background-color: #6c757d;
+  color: white;
+}
+.auto-write-button:hover {
+  background-color: #5a6268;
+}
+
+.view-history-button {
+  background-color: #ffc107;
+  color: #212529;
+}
+.view-history-button:hover {
+  background-color: #e0a800;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.95rem;
+  color: #007bff;
+  background-color: #9af7cd;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+@media (max-width: 992px) {
+  .grid-layout {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .back-button,
+  .scheduleBuilder-button {
+    width: 100%;
+  }
+}

@@ -26,18 +26,44 @@ export class IntervalTagManagerComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  // ngOnInit(): void {
+  //   const state = history.state;
+  //   this.connection = state.connection || JSON.parse(localStorage.getItem('selectedConnection') || '{}');
+  //   // this.interval = state.interval || parseInt(localStorage.getItem('selectedInterval') || '0');
+  //   if (state.interval) {
+  //     this.interval = state.interval;
+  //     localStorage.setItem('selectedInterval', this.interval.toString());
+  //   } else {
+  //     this.interval = parseInt(localStorage.getItem('selectedInterval') || '0');
+  //   }
+
+  //   if (!this.connection || !this.connection.id) {
+  //     this.router.navigate(['/']);
+  //     return;
+  //   }
+
+  //   this.fetchTags(this.connection);
+  // }
+
   ngOnInit(): void {
-    const state = history.state;
-    this.connection = state.connection || JSON.parse(localStorage.getItem('selectedConnection') || '{}');
-    this.interval = state.interval || parseInt(localStorage.getItem('selectedInterval') || '0');
+  const state = history.state;
+  this.connection = state.connection || JSON.parse(localStorage.getItem('selectedConnection') || '{}');
 
-    if (!this.connection || !this.connection.id) {
-      this.router.navigate(['/']);
-      return;
-    }
-
-    this.fetchTags(this.connection);
+  if (state.interval !== undefined && state.interval !== null) {
+    this.interval = parseFloat(state.interval);
+    localStorage.setItem('selectedInterval', this.interval.toString());
+  } else {
+    this.interval = parseFloat(localStorage.getItem('selectedInterval') || '0');
   }
+
+  if (!this.connection || !this.connection.id) {
+    this.router.navigate(['/']);
+    return;
+  }
+
+  this.fetchTags(this.connection);
+}
+
 
   fetchTags(connection: Connection): void {
     this.http.get<string[]>(`http://localhost:8081/getSavedTagsById?connectionId=${connection.id}`).subscribe({
@@ -158,7 +184,7 @@ export class IntervalTagManagerComponent implements OnInit {
   }
   
   goToScheduler(): void {
-   this.router.navigate(['/scheduler']);
+   this.router.navigate(['/inter-scheduler']);
   }
 
   isNewTag(tag: string): boolean {

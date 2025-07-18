@@ -27,7 +27,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**","api/**","/getSavedTagsById").permitAll() //,"/getSavedTagsById","/tagValues/**","/saveSelectedTags","/user/**"
+                        .requestMatchers("/auth/**","api/**","/getSavedTagsById","/interval-tags/**","/tagValues").permitAll() //,"/getSavedTagsById","/tagValues/**","/saveSelectedTags","/user/**"
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/user/**","/getSavedTagsById","/tagValues/**","/saveSelectedTags","/interval-tags/**").hasAnyAuthority
                         ("USER", "ADMIN")

@@ -1,5 +1,6 @@
 package com.nextfirsttag.services.servicesImpl;
 
+import com.nextfirsttag.dto.IntervalTagGroupDTO;
 import com.nextfirsttag.entities.Connection;
 import com.nextfirsttag.entities.IntervalTag;
 import com.nextfirsttag.repositories.ConnectionRepository;
@@ -24,7 +25,7 @@ public class IntervalTagServiceImpl implements IntervalTagService {
 
     @Transactional
     @Override
-    public void saveTagsForInterval(Long connectionId, int interval, List<String> tags) {
+    public void saveTagsForInterval(Long connectionId, Float interval, List<String> tags) {
         Connection connection = connectionRepository.findById(connectionId)
                 .orElseThrow(() -> new RuntimeException("Connection not found"));
 
@@ -36,16 +37,33 @@ public class IntervalTagServiceImpl implements IntervalTagService {
     }
 
     @Override
-    public List<String> getTagsForInterval(Long connectionId, int interval) {
+    public List<String> getTagsForInterval(Long connectionId, Float interval) {
         return intervalTagRepository.findByConnectionIdAndInterval(connectionId, interval)
                 .stream()
                 .map(IntervalTag::getTag)
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<IntervalTagGroupDTO> getGroupedTagsByConnection(Long connectionId) {
+        List<IntervalTag> tags = intervalTagRepository.findByConnectionId(connectionId);
+
+        return tags.stream()
+                .collect(Collectors.groupingBy(IntervalTag::getInterval))
+                .entrySet()
+                .stream()
+                .map(entry -> new IntervalTagGroupDTO(
+                        entry.getKey(),
+                        entry.getValue().stream().map(IntervalTag::getTag).collect(Collectors.toList())
+                ))
+                .sorted((a, b) -> Float.compare(a.getInterval(), b.getInterval()))
+                .collect(Collectors.toList());
+    }
+
+
     @Transactional
     @Override
-    public void deleteSpecificTagsForInterval(Long connectionId, int interval, List<String> tags) {
+    public void deleteSpecificTagsForInterval(Long connectionId, Float interval, List<String> tags) {
         List<IntervalTag> intervalTags = intervalTagRepository.findByConnectionIdAndInterval(connectionId, interval)
                 .stream()
                 .filter(it -> tags.contains(it.getTag()))
@@ -56,7 +74,7 @@ public class IntervalTagServiceImpl implements IntervalTagService {
 
     @Transactional
     @Override
-    public void deleteAllTagsForInterval(Long connectionId, int interval) {
+    public void deleteAllTagsForInterval(Long connectionId, Float interval) {
         List<IntervalTag> intervalTags = intervalTagRepository.findByConnectionIdAndInterval(connectionId, interval);
         intervalTagRepository.deleteAll(intervalTags);
     }

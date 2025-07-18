@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 @RequestMapping("/tagValues")
 public class TagValueController {
+  
+ private TagValueService tagValueService;
 
-    @Autowired
-    private TagValueService tagValueService;
+ public TagValueController (TagValueService tagValueService)  {
+   this.tagValueService =  tagValueService;
+ }
 
 @PostMapping("/save")
 public ResponseEntity<Map<String, String>> saveTagValues(@RequestBody TagValueRequest request) {
